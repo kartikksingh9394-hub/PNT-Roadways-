@@ -3,102 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin - Animated Gadget Portal</title>
+    <title>Navin - Smart Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <style>
-        body { font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
-        
-        /* Service Card Hover & Animation */
-        .service-item { opacity: 0; animation: fadeInUp 0.6s forwards; }
-        .service-icon { 
-            background-color: #f1f9f9; 
-            border-radius: 15px; 
-            transition: all 0.3s ease;
+        body { font-family: 'Segoe UI', sans-serif; }
+        .service-icon-box { 
+            background-color: #f3fbfb; 
+            border-radius: 18px; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .service-icon:active { transform: scale(0.9); background-color: #e2f2f2; }
+        .service-card:active .service-icon-box { transform: scale(0.9); background-color: #e2f2f2; }
         
-        /* Custom Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Staggered Delay for Grid Items */
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-        .delay-6 { animation-delay: 0.6s; }
-
-        .nav-item:active { transform: translateY(-5px); transition: 0.2s; color: #14b8a6; }
+        .animate-item { animation: slideUp 0.6s ease forwards; opacity: 0; }
     </style>
 </head>
 <body class="bg-white pb-24">
 
-    <header class="flex justify-between items-center px-4 py-4 bg-white sticky top-0 z-50 animate__animated animate__fadeInDown">
-        <h1 class="text-2xl font-extrabold text-teal-500 italic tracking-tighter">NAVIN</h1>
-        <button class="text-gray-700 text-2xl active:rotate-90 transition-transform"><i class="fa-solid fa-bars"></i></button>
+    <header class="flex justify-between items-center px-5 py-4 bg-white sticky top-0 z-50 animate__animated animate__fadeInDown">
+        <h1 class="text-2xl font-black text-teal-500 italic tracking-tighter">NAVIN</h1>
+        <button class="text-gray-800 text-2xl"><i class="fa-solid fa-bars"></i></button>
     </header>
 
-    <div class="px-4 py-2 animate__animated animate__fadeIn">
-        <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
+    <div class="px-5 py-2 animate__animated animate__fadeIn">
+        <div class="relative group">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-400 group-focus-within:text-teal-500 transition-colors"></i>
             <input type="text" placeholder="Search for mobiles, accessories & More" 
-                   class="w-full bg-gray-50 border-none rounded-xl py-3 pl-10 focus:ring-2 focus:ring-teal-500 shadow-inner">
+                   class="w-full bg-gray-100 border-none rounded-2xl py-3.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-teal-400 outline-none transition-all">
         </div>
     </div>
 
-    <div class="px-4 mt-4 animate__animated animate__zoomIn">
-        <div class="bg-gradient-to-br from-blue-500 to-teal-400 rounded-3xl p-6 relative h-48 shadow-lg overflow-hidden text-white">
+    <div class="px-5 mt-4 animate__animated animate__zoomIn">
+        <div class="bg-gradient-to-br from-blue-600 to-teal-400 rounded-[2rem] p-7 relative h-48 shadow-xl overflow-hidden text-white">
             <div class="relative z-10">
-                <h2 class="text-2xl font-bold">Price Crash Zone</h2>
-                <p class="text-sm opacity-90 mt-1 mb-4">Lowest prices on all <br>refurbished gadgets.</p>
-                <button class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">
+                <h2 class="text-2xl font-bold leading-tight">Price Crash Zone</h2>
+                <p class="text-sm opacity-90 mt-1 mb-5">Get the devices you want <br>at lowest-ever prices</p>
+                <button class="bg-black text-white px-7 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider active:scale-90 transition-transform shadow-lg">
                     Order Now
                 </button>
             </div>
-            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-white opacity-20 rounded-full animate-pulse"></div>
+            <i class="fa-solid fa-bolt-lightning absolute right-[-20px] bottom-[-20px] text-[150px] opacity-10 rotate-12"></i>
+        </div>
+        <div class="flex justify-center gap-1.5 mt-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-200"></span>
+            <span class="w-5 h-1.5 rounded-full bg-teal-500"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-200"></span>
         </div>
     </div>
 
-    <div class="px-4 mt-8">
-        <h3 class="text-lg font-bold text-gray-800 mb-5">Our Services</h3>
-        <div class="grid grid-cols-4 gap-y-6 gap-x-3">
+    <div class="px-5 mt-8">
+        <h3 class="text-lg font-bold text-gray-900 mb-6">Our Services</h3>
+        <div class="grid grid-cols-4 gap-y-8 gap-x-4">
             
-            <div class="service-item delay-1 flex flex-col items-center">
-                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-mobile-screen text-teal-600 text-xl"></i>
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.1s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-mobile-screen-button text-teal-600 text-2xl"></i>
                 </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Sell Phone</span>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700 leading-tight">Sell Phone</span>
             </div>
 
-            <div class="service-item delay-2 flex flex-col items-center">
-                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-laptop text-blue-600 text-xl"></i>
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.2s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-laptop text-blue-600 text-2xl"></i>
                 </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Buy Gadgets</span>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Buy Gadgets</span>
             </div>
 
-            <div class="service-item delay-3 flex flex-col items-center">
-                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-tools text-red-500 text-xl"></i>
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.3s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-wrench text-orange-500 text-2xl"></i>
                 </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Repair</span>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Repair</span>
             </div>
 
-            <div class="service-item delay-4 flex flex-col items-center">
-                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-recycle text-green-600 text-xl"></i>
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.4s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-recycle text-green-600 text-2xl"></i>
                 </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Recycle</span>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Recycle</span>
             </div>
 
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.5s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-headphones text-purple-600 text-2xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Accessories</span>
             </div>
+
+            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.6s">
+                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-clock text-blue-700 text-2xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Watches</span>
+            </div>
+        </div>
     </div>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t flex justify-around py-3 shadow-2xl z-50">
-        <div class="nav-item flex flex-col items-center text-teal-500">
+    <nav class="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-100 flex justify-around py-4 px-2 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-50">
+        <div class="flex flex-col items-center text-teal-500"><i class="fa-solid fa-house-chimney text-xl"></i><span class="text-[10px] font-bold mt-1">Home</span></div>
+        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-shopping-bag text-xl"></i><span class="text-[10px] font-bold mt-1">Buy</span></div>
+        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-tags text-xl"></i><span class="text-[10px] font-bold mt-1">Sell</span></div>
+        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-circle-user text-xl"></i><span class="text-[10px] font-bold mt-1">Profile</span></div>
+    </nav>
+
+</body>
+</html>
