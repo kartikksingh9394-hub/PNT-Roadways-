@@ -2,44 +2,93 @@
 <html>
 <head>
   <title>PNT Transport</title>
-</head>
-<body style="font-family:Arial; text-align:center;">
-
-  <h1>🚚 PNT Transport</h1>
-  <p>Safe & Fast Transport Service</p>
-
-  <hr>
-
-  <h2>Book Your Truck</h2>
-
-  <input type="text" id="name" placeholder="Your Name"><br><br>
-  <input type="text" id="phone" placeholder="Phone Number"><br><br>
-  <input type="text" id="pickup" placeholder="Pickup Location"><br><br>
-  <input type="text" id="drop" placeholder="Drop Location"><br><br>
-
-  <button onclick="sendWhatsApp()">Book on WhatsApp</button>
-
-  <hr>
-
-  <p>📞 999010996832</p>
-  <p>📍 Greater Noida</p>
-
-  <script>
-    function sendWhatsApp() {
-      var name = document.getElementById("name").value;
-      var phone = document.getElementById("phone").value;
-      var pickup = document.getElementById("pickup").value;
-      var drop = document.getElementById("drop").value;
-
-      var message = "New Booking:%0A"
-        + "Name: " + name + "%0A"
-        + "Phone: " + phone + "%0A"
-        + "Pickup: " + pickup + "%0A"
-        + "Drop: " + drop;
-
-      window.open("https://wa.me/919990109968?text=" + message);
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-  </script>
+
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fade 1s ease;
+    }
+
+    @keyframes fade {
+      from {opacity:0; transform:translateY(30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    input:focus {
+      border-color: #ff6a00;
+      outline: none;
+      box-shadow: 0 0 5px #ff6a00;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>🚚 NVN t</h2>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="text" id="phone" placeholder="Phone Number">
+  <input type="text" id="pickup" placeholder="Pickup Location">
+  <input type="text" id="drop" placeholder="Drop Location">
+
+  <button onclick="send()">Book Now</button>
+</div>
+
+<script>
+function send(){
+var n=document.getElementById("name").value;
+var p=document.getElementById("phone").value;
+var pi=document.getElementById("pickup").value;
+var d=document.getElementById("drop").value;
+
+var msg="Booking:%0AName:"+n+"%0APhone:"+p+"%0APickup:"+pi+"%0ADrop:"+d;
+
+window.open("https://wa.me/919990109968?text="+msg);
+}
+</script>
 
 </body>
 </html>
