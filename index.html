@@ -1,94 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PNT Transport</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #ff6a00, #ee0979);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navin - Animated Gadget Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        
+        /* Service Card Hover & Animation */
+        .service-item { opacity: 0; animation: fadeInUp 0.6s forwards; }
+        .service-icon { 
+            background-color: #f1f9f9; 
+            border-radius: 15px; 
+            transition: all 0.3s ease;
+        }
+        .service-icon:active { transform: scale(0.9); background-color: #e2f2f2; }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .box {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      animation: fade 1s ease;
-    }
+        /* Staggered Delay for Grid Items */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
 
-    @keyframes fade {
-      from {opacity:0; transform:translateY(30px);}
-      to {opacity:1; transform:translateY(0);}
-    }
-
-    h2 {
-      margin-bottom: 15px;
-    }
-
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    input:focus {
-      border-color: #ff6a00;
-      outline: none;
-      box-shadow: 0 0 5px #ff6a00;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 25px;
-      background: linear-gradient(135deg, #ff6a00, #ee0979);
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-  </style>
+        .nav-item:active { transform: translateY(-5px); transition: 0.2s; color: #14b8a6; }
+    </style>
 </head>
-<body>
+<body class="bg-white pb-24">
 
-<div class="box">
-  <h2>🚚 NVN t</h2>
+    <header class="flex justify-between items-center px-4 py-4 bg-white sticky top-0 z-50 animate__animated animate__fadeInDown">
+        <h1 class="text-2xl font-extrabold text-teal-500 italic tracking-tighter">NAVIN</h1>
+        <button class="text-gray-700 text-2xl active:rotate-90 transition-transform"><i class="fa-solid fa-bars"></i></button>
+    </header>
 
-  <input type="text" id="name" placeholder="Your Name">
-  <input type="text" id="phone" placeholder="Phone Number">
-  <input type="text" id="pickup" placeholder="Pickup Location">
-  <input type="text" id="drop" placeholder="Drop Location">
+    <div class="px-4 py-2 animate__animated animate__fadeIn">
+        <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-gray-400"></i>
+            <input type="text" placeholder="Search for mobiles, accessories & More" 
+                   class="w-full bg-gray-50 border-none rounded-xl py-3 pl-10 focus:ring-2 focus:ring-teal-500 shadow-inner">
+        </div>
+    </div>
 
-  <button onclick="send()">Book Now</button>
-</div>
+    <div class="px-4 mt-4 animate__animated animate__zoomIn">
+        <div class="bg-gradient-to-br from-blue-500 to-teal-400 rounded-3xl p-6 relative h-48 shadow-lg overflow-hidden text-white">
+            <div class="relative z-10">
+                <h2 class="text-2xl font-bold">Price Crash Zone</h2>
+                <p class="text-sm opacity-90 mt-1 mb-4">Lowest prices on all <br>refurbished gadgets.</p>
+                <button class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold text-sm shadow-md active:scale-95 transition-transform">
+                    Order Now
+                </button>
+            </div>
+            <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-white opacity-20 rounded-full animate-pulse"></div>
+        </div>
+    </div>
 
-<script>
-function send(){
-var n=document.getElementById("name").value;
-var p=document.getElementById("phone").value;
-var pi=document.getElementById("pickup").value;
-var d=document.getElementById("drop").value;
+    <div class="px-4 mt-8">
+        <h3 class="text-lg font-bold text-gray-800 mb-5">Our Services</h3>
+        <div class="grid grid-cols-4 gap-y-6 gap-x-3">
+            
+            <div class="service-item delay-1 flex flex-col items-center">
+                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-mobile-screen text-teal-600 text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Sell Phone</span>
+            </div>
 
-var msg="Booking:%0AName:"+n+"%0APhone:"+p+"%0APickup:"+pi+"%0ADrop:"+d;
+            <div class="service-item delay-2 flex flex-col items-center">
+                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-laptop text-blue-600 text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Buy Gadgets</span>
+            </div>
 
-window.open("https://wa.me/919990109968?text="+msg);
-}
-</script>
+            <div class="service-item delay-3 flex flex-col items-center">
+                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-tools text-red-500 text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Repair</span>
+            </div>
 
-</body>
-</html>
+            <div class="service-item delay-4 flex flex-col items-center">
+                <div class="service-icon w-14 h-14 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-recycle text-green-600 text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-center text-gray-600">Recycle</span>
+            </div>
+
+            </div>
+    </div>
+
+    <nav class="fixed bottom-0 w-full bg-white border-t flex justify-around py-3 shadow-2xl z-50">
+        <div class="nav-item flex flex-col items-center text-teal-500">
