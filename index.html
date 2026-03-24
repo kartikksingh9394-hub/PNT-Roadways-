@@ -1,141 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Thakur - Smart Solutions</title>
-    <button id="menuBtn" style="font-size: 25px; border: none; background: none;"> &#8942; </button>
+<title>Navin Thakur</title>
 
-<div id="dropdownMenu" style="display: none; position: absolute; right: 10px; background: white; shadow: 2px 2px 10px rgba(0,0,0,0.1); border-radius: 8px; width: 150px; z-index: 100;">
-    <p style="padding: 10px; border-bottom: 1px solid #eee;">Settings</p>
-    <p style="padding: 10px; color: red;">Logout</p>
-</div>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; }
-        .service-icon-box { 
-            background-color: #f3fbfb; 
-            border-radius: 18px; 
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .service-card:active .service-icon-box { transform: scale(0.9); background-color: #e2f2f2; }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-item { animation: slideUp 0.6s ease forwards; opacity: 0; }
-    </style>
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(45deg, red, blue, purple, orange);
+  background-size: 400% 400%;
+  animation: bg 10s infinite alternate;
+  color: white;
+  text-align: center;
+}
+
+@keyframes bg {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 60px;
+  margin-top: 100px;
+  animation: fade 2s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(-50px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.popup-content {
+  background: white;
+  color: black;
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+</style>
+
 </head>
-<body class="bg-white pb-24">
 
-    <header class="flex justify-between items-center px-5 py-4 bg-white sticky top-0 z-50 animate__animated animate__fadeInDown">
-        <h1 class="text-2xl font-black text-teal-500 italic tracking-tighter">NAVIN</h1>
-        <button class="text-gray-800 text-2xl"><i class="fa-solid fa-bars"></i></button>
-    </header>
+<body>
 
-    <div class="px-5 py-2 animate__animated animate__fadeIn">
-        <div class="relative group">
-            <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-gray-400 group-focus-within:text-teal-500 transition-colors"></i>
-            <input type="text" placeholder="Search for mobiles, accessories & More" 
-                   class="w-full bg-gray-100 border-none rounded-2xl py-3.5 pl-11 pr-4 text-sm focus:ring-2 focus:ring-teal-400 outline-none transition-all">
-        </div>
-    </div>
+<nav>
+  <div>🌐 My Website</div>
+  <div>
+    <button onclick="openLogin()">Login</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+</nav>
 
-    <div class="px-5 mt-4 animate__animated animate__zoomIn">
-        <div class="bg-gradient-to-br from-blue-600 to-teal-400 rounded-[2rem] p-7 relative h-48 shadow-xl overflow-hidden text-white">
-            <div class="relative z-10">
-                <h2 class="text-2xl font-bold leading-tight">Price Crash Zone</h2>
-                <p class="text-sm opacity-90 mt-1 mb-5">Get the devices you want <br>at lowest-ever prices</p>
-                <button class="bg-black text-white px-7 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider active:scale-90 transition-transform shadow-lg">
-                    Order Now
-                </button>
-            </div>
-            <i class="fa-solid fa-bolt-lightning absolute right-[-20px] bottom-[-20px] text-[150px] opacity-10 rotate-12"></i>
-        </div>
-        <div class="flex justify-center gap-1.5 mt-4">
-            <span class="w-1.5 h-1.5 rounded-full bg-gray-200"></span>
-            <span class="w-5 h-1.5 rounded-full bg-teal-500"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-gray-200"></span>
-        </div>
-    </div>
+<h1>Navin Thakur</h1>
 
-    <div class="px-5 mt-8">
-        <h3 class="text-lg font-bold text-gray-900 mb-6">Our Services</h3>
-        <div class="grid grid-cols-4 gap-y-8 gap-x-4">
-            
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.1s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-mobile-screen-button text-teal-600 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700 leading-tight">Sell Phone</span>
-            </div>
+<p>Welcome to my animated website 🚀</p>
 
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.2s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-laptop text-blue-600 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Buy Gadgets</span>
-            </div>
+<a href="about.html">
+  <button>Go to Page 2</button>
+</a>
 
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.3s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-wrench text-orange-500 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Repair</span>
-            </div>
+<!-- Login Popup -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username"><br><br>
+    <input type="password" placeholder="Password"><br><br>
+    <button onclick="login()">Login</button><br><br>
+    <button onclick="closeLogin()">Close</button>
+  </div>
+</div>
 
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.4s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-recycle text-green-600 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Recycle</span>
-            </div>
-
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.5s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-headphones text-purple-600 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Accessories</span>
-            </div>
-
-            <div class="service-card animate-item flex flex-col items-center" style="animation-delay: 0.6s">
-                <div class="service-icon-box w-16 h-16 flex items-center justify-center shadow-sm">
-                    <i class="fa-solid fa-clock text-blue-700 text-2xl"></i>
-                </div>
-                <span class="text-[10px] font-bold mt-2 text-center text-gray-700">Watches</span>
-            </div>
-        </div>
-    </div>
-
-    <nav class="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-100 flex justify-around py-4 px-2 shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-50">
-        <div class="flex flex-col items-center text-teal-500"><i class="fa-solid fa-house-chimney text-xl"></i><span class="text-[10px] font-bold mt-1">Home</span></div>
-        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-shopping-bag text-xl"></i><span class="text-[10px] font-bold mt-1">Buy</span></div>
-        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-tags text-xl"></i><span class="text-[10px] font-bold mt-1">Sell</span></div>
-        <div class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-circle-user text-xl"></i><span class="text-[10px] font-bold mt-1">Profile</span></div>
-    </nav>
 <script>
-    // 1. Button aur Menu ko dhoondo
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('dropdownMenu');
+function openLogin(){
+  document.getElementById("popup").style.display="block";
+}
 
-    // 2. Jab button par click ho
-    btn.onclick = function() {
-        if (menu.style.display === "none") {
-            menu.style.display = "block"; // Dikhao
-        } else {
-            menu.style.display = "none";  // Chhupao
-        }
-    };
+function closeLogin(){
+  document.getElementById("popup").style.display="none";
+}
+
+function login(){
+  alert("Login Successful ✅");
+  closeLogin();
+}
+
+function logout(){
+  alert("Logged out ❌");
+}
 </script>
-    <div style="padding: 20px; background: white; margin-top: 20px; border-radius: 20px; border: 2px solid teal;">
-    <h2 style="color: teal; font-weight: bold;">NAVIN - Sell Phone Form</h2>
-    <input type="text" placeholder="Apna Naam" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 10px;">
-    <input type="number" placeholder="Mobile Number" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 10px;">
-    <button style="width: 100%; background: teal; color: white; padding: 15px; border-radius: 10px; border: none; font-weight: bold;">SUBMIT</button>
-    </div>
+
 </body>
 </html>
