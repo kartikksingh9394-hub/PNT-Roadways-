@@ -3,10 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Second Page</title>
+  <title>Premium Website</title>
+  <style>
+    /* Full page gradient background */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Animated moving background effect */
+    body::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
+      animation: moveBg 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveBg {
+      0% { transform: rotate(0deg) translate(0,0); }
+      50% { transform: rotate(180deg) translate(50px,50px); }
+      100% { transform: rotate(360deg) translate(0,0); }
+    }
+
+    /* Content container above background */
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+    }
+
+    /* Glow Button */
+    .button {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s;
+    }
+    .button:hover::after {
+      transform: scale(1);
+    }
+    .button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 65, 108, 0.7);
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    }
+    .button:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: 0 5px 15px rgba(255, 65, 108, 0.5);
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Second Page!</h1>
-  <p>Ye page successfully load ho gaya.</p>
+
+  <div class="content">
+    <h1>Welcome to My Premium Site</h1>
+    <p>This is your advanced website with beautiful background and glow button</p>
+    <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
+  </div>
+
 </body>
 </html>
