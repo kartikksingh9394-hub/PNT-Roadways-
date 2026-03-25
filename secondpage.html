@@ -3,235 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Truck Hero</title>
-  <style>
-    /* Full page hero background */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      overflow: hidden;
-    }
-
-    .hero {
-      position: relative;
-      height: 100vh;
-      width: 100%;
-      background: url('https://images.unsplash.com/photo-1593109050258-7cf4d34eb1c0?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Dark overlay for text visibility */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5); /* dark overlay */
-      z-index: 1;
-    }
-
-    /* Hero content */
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
-    }
-
-    /* Glow Button */
-    .button {
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      color: white;
-      padding: 18px 50px;
-      border: none;
-      border-radius: 15px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 25px rgba(255, 65, 108, 0.6);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .button::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
-      transform: scale(0);
-      transition: transform 0.5s;
-    }
-
-    .button:hover::after {
-      transform: scale(1);
-    }
-
-    .button:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(255, 65, 108, 0.8);
-      background: linear-gradient(90deg, #ff4b2b, #ff416c);
-    }
-
-    .button:active {
-      transform: translateY(-2px) scale(0.98);
-      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Ultimate Truck Experience</h1>
-      <p>High-end premium website layout with advanced hero section design</p>
-      <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
-    </div>
-  </div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Truck Design</title>
-  <style>
-    /* Full-page hero background */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      overflow: hidden;
-    }
-
-    .hero {
-      position: relative;
-      height: 100vh;
-      width: 100%;
-      background: url('https://images.unsplash.com/photo-1617109764936-0a03d77c99d7?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Dark overlay for text visibility */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5); /* dark overlay */
-      z-index: 1;
-      backdrop-filter: blur(2px); /* subtle blur for graphic effect */
-    }
-
-    /* Hero content */
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
-    }
-
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
-    }
-
-    /* Glow Button */
-    .button {
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      color: white;
-      padding: 18px 50px;
-      border: none;
-      border-radius: 15px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 25px rgba(255, 65, 108, 0.6);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .button::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
-      transform: scale(0);
-      transition: transform 0.5s;
-    }
-
-    .button:hover::after {
-      transform: scale(1);
-    }
-
-    .button:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(255, 65, 108, 0.8);
-      background: linear-gradient(90deg, #ff4b2b, #ff416c);
-    }
-
-    .button:active {
-      transform: translateY(-2px) scale(0.98);
-      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Ultimate Truck Design</h1>
-      <p>High-end premium hero section with glow button and graphic truck image</p>
-      <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
-      <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Premium Form</title>
   <style>
+    /* Full page background */
     body, html {
       margin: 0;
       padding: 0;
@@ -242,14 +16,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
+    /* Form container */
     .form-container {
-      background: rgba(0,0,0,0.8);
-      padding: 40px;
+      background: rgba(0,0,0,0.85);
+      padding: 50px;
       border-radius: 20px;
-      box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+      box-shadow: 0 15px 60px rgba(0,0,0,0.7);
       text-align: center;
+      max-width: 500px;
+      width: 90%;
       position: relative;
     }
 
@@ -262,31 +40,53 @@
     input, textarea {
       width: 100%;
       padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
+      margin: 12px 0;
+      border-radius: 12px;
       border: none;
       font-size: 16px;
     }
 
+    /* Glow submit button */
     .submit-button {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       color: white;
-      padding: 18px 40px;
+      padding: 18px 50px;
       font-size: 18px;
       font-weight: bold;
       border: none;
-      border-radius: 12px;
+      border-radius: 15px;
       cursor: pointer;
-      box-shadow: 0 5px 25px rgba(255,65,108,0.6);
+      box-shadow: 0 8px 35px rgba(255,65,108,0.6);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
 
+    .submit-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s;
+    }
+
+    .submit-button:hover::after {
+      transform: scale(1);
+    }
+
     .submit-button:hover {
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(255,65,108,0.8);
+      box-shadow: 0 12px 45px rgba(255,65,108,0.8);
       background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    }
+
+    .submit-button:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: 0 6px 25px rgba(255,65,108,0.5);
     }
 
     /* Modal Popup */
@@ -310,7 +110,7 @@
       border-radius: 20px;
       text-align: center;
       width: 90%;
-      max-width: 500px;
+      max-width: 450px;
       box-shadow: 0 10px 50px rgba(0,0,0,0.7);
     }
 
@@ -321,9 +121,9 @@
     .close-btn {
       background: #ff416c;
       color: white;
-      padding: 10px 25px;
+      padding: 12px 30px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: bold;
       cursor: pointer;
       margin-top: 15px;
@@ -332,46 +132,37 @@
 </head>
 <body>
 
-<div class="form-container">
-  <h1>Premium Contact Form</h1>
-  <input type="text" placeholder="Your Name" id="name">
-  <input type="email" placeholder="Your Email" id="email">
-  <textarea placeholder="Your Message" id="message"></textarea>
-  <button class="submit-button" onclick="submitForm()">Submit</button>
-</div>
-
-<!-- Modal Popup -->
-<div class="modal" id="successModal">
-  <div class="modal-content">
-    <h2>Form Submitted Successfully!</h2>
-    <button class="close-btn" onclick="closeModal()">Close</button>
+  <div class="form-container">
+    <h1>Premium Contact Form</h1>
+    <input type="text" placeholder="Your Name" id="name">
+    <input type="email" placeholder="Your Email" id="email">
+    <textarea placeholder="Your Message" id="message"></textarea>
+    <button class="submit-button" onclick="submitForm()">Submit</button>
   </div>
-</div>
 
-<!-- Audio -->
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
-
-<script>
-function submitForm() {
-  // Play sound
-  document.getElementById('clickSound').play();
-
-  // Show modal popup
-  document.getElementById('successModal').style.display = 'flex';
-}
-
-// Close modal
-function closeModal() {
-  document.getElementById('successModal').style.display = 'none';
-}
-</script>
-
-</body>
-</html>
+  <!-- Modal Popup -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <h2>Form Submitted Successfully!</h2>
+      <button class="close-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
 
-</body>
-</html>
+  <!-- Audio -->
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
+  <script>
+    function submitForm() {
+      // Play sound
+      document.getElementById('clickSound').play();
+      // Show modal popup
+      document.getElementById('successModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').style.display = 'none';
+    }
+  </script>
+
 </body>
 </html>
