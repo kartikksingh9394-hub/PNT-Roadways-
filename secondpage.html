@@ -3,90 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Form</title>
+  <title>Ultra Premium Form</title>
   <style>
-    /* Full page background */
+    /* Basic reset */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
+    }
+
+    /* Background image with cinematic overlay */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1617109764936-0a03d77c99d7?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      filter: brightness(0.5);
+      z-index: 0;
+    }
+
+    /* Particle animation canvas */
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
 
     /* Form container */
     .form-container {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
       background: rgba(0,0,0,0.85);
-      padding: 50px;
+      padding: 40px;
       border-radius: 20px;
       box-shadow: 0 15px 60px rgba(0,0,0,0.7);
-      text-align: center;
-      max-width: 500px;
+      color: white;
+      max-width: 400px;
       width: 90%;
-      position: relative;
+      z-index: 2;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards 0.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     h1 {
-      margin-bottom: 30px;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
     }
 
     input, textarea {
       width: 100%;
-      padding: 15px;
-      margin: 12px 0;
-      border-radius: 12px;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
       border: none;
       font-size: 16px;
+      background: rgba(255,255,255,0.1);
+      color: white;
     }
 
-    /* Glow submit button */
+    input::placeholder, textarea::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Glow + ripple button */
     .submit-button {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       color: white;
-      padding: 18px 50px;
+      padding: 16px 40px;
       font-size: 18px;
       font-weight: bold;
       border: none;
-      border-radius: 15px;
+      border-radius: 12px;
       cursor: pointer;
       box-shadow: 0 8px 35px rgba(255,65,108,0.6);
-      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .submit-button:active::after {
+      transform: scale(2);
+      opacity: 0;
     }
 
     .submit-button::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.4);
+      display: block;
+      position: absolute;
+      border-radius: 50%;
       transform: scale(0);
-      transition: transform 0.5s;
-    }
-
-    .submit-button:hover::after {
-      transform: scale(1);
+      opacity: 1;
+      pointer-events: none;
+      transition: transform 0.5s, opacity 0.5s;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
     }
 
     .submit-button:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 12px 45px rgba(255,65,108,0.8);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 45px rgba(255,65,108,0.8);
       background: linear-gradient(90deg, #ff4b2b, #ff416c);
-    }
-
-    .submit-button:active {
-      transform: translateY(-2px) scale(0.98);
-      box-shadow: 0 6px 25px rgba(255,65,108,0.5);
     }
 
     /* Modal Popup */
@@ -100,7 +136,7 @@
       background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
     }
 
     .modal-content {
@@ -132,6 +168,10 @@
 </head>
 <body>
 
+  <div class="background"></div>
+  <canvas id="particles"></canvas>
+
+  <!-- Form container bottom-right -->
   <div class="form-container">
     <h1>Premium Contact Form</h1>
     <input type="text" placeholder="Your Name" id="name">
@@ -140,7 +180,7 @@
     <button class="submit-button" onclick="submitForm()">Submit</button>
   </div>
 
-  <!-- Modal Popup -->
+  <!-- Modal -->
   <div class="modal" id="successModal">
     <div class="modal-content">
       <h2>Form Submitted Successfully!</h2>
@@ -152,16 +192,72 @@
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
   <script>
+    // Button submit
     function submitForm() {
-      // Play sound
+      // Sound
       document.getElementById('clickSound').play();
-      // Show modal popup
+      // Show modal
       document.getElementById('successModal').style.display = 'flex';
+      // Ripple animation
+      const btn = document.querySelector('.submit-button');
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 500);
     }
-
     function closeModal() {
       document.getElementById('successModal').style.display = 'none';
     }
+
+    // Particle effect
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+    const particles = [];
+    const particleCount = 80;
+
+    function Particle() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 1 - 0.5;
+      this.speedY = Math.random() * 1 - 0.5;
+    }
+
+    Particle.prototype.update = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x > w) this.x = 0;
+      if (this.x < 0) this.x = w;
+      if (this.y > h) this.y = 0;
+      if (this.y < 0) this.y = h;
+    }
+
+    Particle.prototype.draw = function() {
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    function initParticles() {
+      for (let i=0; i<particleCount; i++) particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0,0,w,h);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    initParticles();
+    animateParticles();
   </script>
 
 </body>
