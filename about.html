@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PNT Roadways</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #0d6efd, #00c6ff);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Truck animation */
+    .road {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      background: #333;
+      margin-top: 30px;
+    }
+
+    .truck {
+      position: absolute;
+      font-size: 50px;
+      top: 20px;
+      animation: moveTruck 5s linear infinite;
+    }
+
+    @keyframes moveTruck {
+      from {left: -100px;}
+      to {left: 100%;}
+    }
+
+    .box {
+      background: white;
+      color: black;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    a {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 20px;
+      background: white;
+      color: #0d6efd;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+    }
+
+    a:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🚚 PNT Roadways
+</header>
+
+<!-- Truck Animation -->
+<div class="road">
+  <div class="truck">🚛</div>
+</div>
+
+<div class="box">
+  <h2>About Us</h2>
+  <p>We provide fast, safe and reliable transport services.</p>
+  <p>Your goods are delivered on time with full safety.</p>
+</div>
+
+<div class="box">
+  <h2>Our Services</h2>
+  <p>✔ Truck Booking</p>
+  <p>✔ Parcel Delivery</p>
+  <p>✔ All India Transport</p>
+</div>
+
+<div class="box">
+  <h2>Contact</h2>
+  <p>📞 9990109968</p>
+  <p>📍 Greater Noida</p>
+</div>
+
+<a href="index.html">⬅ Back to Home</a>
+
+</body>
+</html>
