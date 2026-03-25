@@ -1,113 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Navin Thakur</title>
+  <title>PNT Transport</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: linear-gradient(45deg, red, blue, purple, orange);
-  background-size: 400% 400%;
-  animation: bg 10s infinite alternate;
-  color: white;
-  text-align: center;
-}
+  <!-- Mobile fit fix -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@keyframes bg {
-  0% { background-position: left; }
-  100% { background-position: right; }
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f0f2f5;
+      scroll-behavior: smooth;
+    }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-}
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
+    .page1 {
+      background: linear-gradient(135deg, #0d6efd, #00c6ff);
+      color: white;
+      text-align: center;
+    }
 
-h1 {
-  font-size: 60px;
-  margin-top: 100px;
-  animation: fade 2s ease-in-out;
-}
+    .page1 h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(-50px);}
-  to { opacity: 1; transform: translateY(0);}
-}
+    .btn {
+      padding: 12px 20px;
+      background: white;
+      color: #0d6efd;
+      border-radius: 25px;
+      text-decoration: none;
+      margin-top: 15px;
+      font-weight: bold;
+    }
 
-.popup {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.6);
-}
+    .page2 {
+      background: white;
+      text-align: center;
+      padding: 20px;
+    }
 
-.popup-content {
-  background: white;
-  color: black;
-  width: 300px;
-  margin: 100px auto;
-  padding: 20px;
-  border-radius: 10px;
-}
-</style>
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
 
+    button {
+      padding: 12px;
+      width: 90%;
+      border: none;
+      border-radius: 25px;
+      background: #0d6efd;
+      color: white;
+      font-size: 16px;
+    }
+
+    .page3 {
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
 
-<nav>
-  <div>🌐 My Website</div>
-  <div>
-    <button onclick="openLogin()">Login</button>
-    <button onclick="logout()">Logout</button>
-  </div>
-</nav>
+<!-- PAGE 1 -->
+<section class="page1">
+  <h1>🚚 PNT Transport</h1>
+  <p>Fast & Safe Delivery Service</p>
+  <a href="#book" class="btn">Book Now ↓</a>
+</section>
 
-<h1>Navin Thakur</h1>
+<!-- PAGE 2 -->
+<section class="page2" id="book">
+  <h2>Book Your Truck</h2>
 
-<p>Welcome to my animated website 🚀</p>
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="text" id="phone" placeholder="Phone Number">
+  <input type="text" id="pickup" placeholder="Pickup Location">
+  <input type="text" id="drop" placeholder="Drop Location">
 
-<a href="about.html">
-  <button>Go to Page 2</button>
-</a>
+  <button onclick="send()">Book on WhatsApp</button>
+</section>
 
-<!-- Login Popup -->
-<div id="popup" class="popup">
-  <div class="popup-content">
-    <h2>Login</h2>
-    <input type="text" placeholder="Username"><br><br>
-    <input type="password" placeholder="Password"><br><br>
-    <button onclick="login()">Login</button><br><br>
-    <button onclick="closeLogin()">Close</button>
-  </div>
-</div>
+<!-- PAGE 3 -->
+<section class="page3">
+  <h2>Contact Us</h2>
+  <p>📞 9876543210</p>
+  <p>📍 Greater Noida</p>
+</section>
 
 <script>
-function openLogin(){
-  document.getElementById("popup").style.display="block";
-}
+function send(){
+var n=document.getElementById("name").value;
+var p=document.getElementById("phone").value;
+var pi=document.getElementById("pickup").value;
+var d=document.getElementById("drop").value;
 
-function closeLogin(){
-  document.getElementById("popup").style.display="none";
-}
+var msg="Booking:%0AName:"+n+"%0APhone:"+p+"%0APickup:"+pi+"%0ADrop:"+d;
 
-function login(){
-  alert("Login Successful ✅");
-  closeLogin();
-}
-
-function logout(){
-  alert("Logged out ❌");
+window.open("https://wa.me/919999999999?text="+msg);
 }
 </script>
 
