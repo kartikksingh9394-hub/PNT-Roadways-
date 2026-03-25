@@ -76,27 +76,44 @@
 </head>
 
 <body>
-  <div class="scroll-text">
-  🚚 PNT Roadways 🚚 PNT Roadways 🚚 PNT Roadways 🚚
+  <a href="#book" style="
+display:block;
+background:red;
+color:white;
+padding:12px;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+text-decoration:none;
+">
+🚀 Book Truck Now
+  </a>
+  <div class="moving-text">
+🚚 PNT Roadways 🚚 PNT Roadways 🚚 PNT Roadways 🚚
 </div>
 
 <style>
-.scroll-text {
+.moving-text {
   white-space: nowrap;
   overflow: hidden;
-  box-sizing: border-box;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-  color: yellow;
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 20px #0d6efd, 0 0 30px #00c6ff;
 }
-
-.scroll-text {
+.moving-text span {
   display: inline-block;
   padding-left: 100%;
-  animation: scroll 8s linear infinite;
+  animation: moveText 8s linear infinite;
 }
 
-@keyframes scroll {
+.moving-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: moveText 8s linear infinite;
+}
+
+@keyframes moveText {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
