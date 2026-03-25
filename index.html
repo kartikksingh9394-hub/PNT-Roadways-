@@ -158,5 +158,67 @@ window.open("https://wa.me/919990109968?text="+msg);
     width="100%" height="200" style="border:0;">
   </iframe>
   </div>
+  <!-- Floating Enquiry Button -->
+<a href="https://wa.me/919990109968?text=Hello%20PNT%20Roadways%2C%20mujhe%20enquiry%20karni%20hai"
+class="enquiry-btn">💬 Enquiry</a>
+
+<style>
+.enquiry-btn{
+  position: fixed;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #25D366;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform: translateY(-50%);}
+  50%{transform: translateY(-60%);}
+}
+</style>
+  <!-- Advanced Floating Button -->
+<a href="https://wa.me/919990109968?text=Hello%20PNT%20Roadways%2C%20mujhe%20enquiry%20karni%20hai" 
+class="float-btn" target="_blank">
+
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="25">
+  <span>Chat</span>
+
+</a>
+
+<style>
+.float-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  background: #25D366;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: pulse 1.5s infinite;
+}
+
+.float-btn img{
+  border-radius: 50%;
+}
+
+@keyframes pulse{
+  0%{box-shadow: 0 0 0 0 rgba(37,211,102,0.7);}
+  70%{box-shadow: 0 0 0 15px rgba(37,211,102,0);}
+  100%{box-shadow: 0 0 0 0 rgba(37,211,102,0);}
+}
+</style>
 </body>
 </html>
