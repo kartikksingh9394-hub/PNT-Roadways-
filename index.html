@@ -1,5 +1,38 @@
 <!DOCTYPE html>
 <html>
+  <style>
+  /* Isse text ko gradient aur background premium milega */
+  .premium-section {
+      background-color: #000; /* Background kala karne ke liye */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0;
+  }
+
+  .premium-text {
+      font-size: 80px;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(to bottom, #888 0%, #000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: absolute;
+      top: 50px;
+      z-index: 1;
+  }
+
+  .phone-image {
+      width: 80%;
+      max-width: 400px;
+      transform: rotate(-10deg); /* Phone ko thoda teda karne ke liye */
+      z-index: 2;
+      margin-top: 60px;
+  }
+  </style>
+  
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PNT ROADWAYS </title>
