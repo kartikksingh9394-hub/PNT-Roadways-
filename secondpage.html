@@ -112,6 +112,123 @@
       <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
     </div>
   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Truck Design</title>
+  <style>
+    /* Full-page hero background */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
 
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1617109764936-0a03d77c99d7?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Dark overlay for text visibility */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5); /* dark overlay */
+      z-index: 1;
+      backdrop-filter: blur(2px); /* subtle blur for graphic effect */
+    }
+
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+    }
+
+    /* Glow Button */
+    .button {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      color: white;
+      padding: 18px 50px;
+      border: none;
+      border-radius: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 25px rgba(255, 65, 108, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s;
+    }
+
+    .button:hover::after {
+      transform: scale(1);
+    }
+
+    .button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 40px rgba(255, 65, 108, 0.8);
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+    }
+
+    .button:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Ultimate Truck Design</h1>
+      <p>High-end premium hero section with glow button and graphic truck image</p>
+      <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
+    </div>
+  </div>
+
+</body>
+</html>
 </body>
 </html>
