@@ -3,76 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Website</title>
+  <title>Premium Truck Hero</title>
   <style>
-    /* Full page gradient background */
-    body {
+    /* Full page hero background */
+    body, html {
       margin: 0;
       padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
       height: 100vh;
+      width: 100%;
+      background: url('https://images.unsplash.com/photo-1593109050258-7cf4d34eb1c0?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
       text-align: center;
-      overflow: hidden;
     }
 
-    /* Animated moving background effect */
-    body::before {
+    /* Dark overlay for text visibility */
+    .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
-      animation: moveBg 20s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes moveBg {
-      0% { transform: rotate(0deg) translate(0,0); }
-      50% { transform: rotate(180deg) translate(50px,50px); }
-      100% { transform: rotate(360deg) translate(0,0); }
-    }
-
-    /* Content container above background */
-    .content {
-      position: relative;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5); /* dark overlay */
       z-index: 1;
     }
 
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+
     h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
     }
 
     p {
       font-size: 1.2rem;
       margin-bottom: 40px;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
     }
 
     /* Glow Button */
     .button {
       background: linear-gradient(90deg, #ff416c, #ff4b2b);
       color: white;
-      padding: 15px 40px;
+      padding: 18px 50px;
       border: none;
-      border-radius: 12px;
-      font-size: 18px;
+      border-radius: 15px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
+      box-shadow: 0 5px 25px rgba(255, 65, 108, 0.6);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
     }
+
     .button::after {
       content: '';
       position: absolute;
@@ -84,26 +86,31 @@
       transform: scale(0);
       transition: transform 0.5s;
     }
+
     .button:hover::after {
       transform: scale(1);
     }
+
     .button:hover {
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 10px 30px rgba(255, 65, 108, 0.7);
+      box-shadow: 0 10px 40px rgba(255, 65, 108, 0.8);
       background: linear-gradient(90deg, #ff4b2b, #ff416c);
     }
+
     .button:active {
       transform: translateY(-2px) scale(0.98);
-      box-shadow: 0 5px 15px rgba(255, 65, 108, 0.5);
+      box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
     }
   </style>
 </head>
 <body>
 
-  <div class="content">
-    <h1>Welcome to My Premium Site</h1>
-    <p>This is your advanced website with beautiful background and glow button</p>
-    <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Ultimate Truck Experience</h1>
+      <p>High-end premium website layout with advanced hero section design</p>
+      <button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
+    </div>
   </div>
 
 </body>
