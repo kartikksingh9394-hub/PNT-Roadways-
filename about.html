@@ -1,2 +1,102 @@
-<h1>2nd Page Working ✅</h1>
-<a href="index.html">Back</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PNT Roadways</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #0d6efd, #00c6ff);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Truck Animation */
+    .road {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      background: #333;
+      margin-top: 20px;
+    }
+
+    .truck {
+      position: absolute;
+      font-size: 40px;
+      top: 15px;
+      animation: move 4s linear infinite;
+    }
+
+    @keyframes move {
+      from { left: -100px; }
+      to { left: 100%; }
+    }
+
+    .box {
+      background: white;
+      color: black;
+      margin: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      animation: fade 1.5s ease;
+    }
+
+    @keyframes fade {
+      from {opacity:0; transform:translateY(30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    a {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background: white;
+      color: #0d6efd;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🚚 PNT Roadways
+</header>
+
+<div class="road">
+  <div class="truck">🚛</div>
+</div>
+
+<div class="box">
+  <h2>About Us</h2>
+  <p>PNT Roadways provides fast, safe and reliable transport service.</p>
+</div>
+
+<div class="box">
+  <h2>Our Services</h2>
+  <p>✔ Truck Booking</p>
+  <p>✔ Parcel Delivery</p>
+  <p>✔ All India Transport</p>
+</div>
+
+<div class="box">
+  <h2>Contact</h2>
+  <p>📞 9990109968</p>
+  <p>📍 Greater Noida</p>
+</div>
+
+<a href="index.html">⬅ Back to Home</a>
+
+</body>
+</html>
