@@ -91,7 +91,26 @@ text-decoration:none;
 🚀 Book Truck Now
   </a>
   <div class="moving-text">
-🚚 PNT Roadways 🚚 PNT Roadways 🚚 PNT Roadways 🚚
+<span>🚚 PNT Roadways 🚚 PNT Roadways 🚚</span>
+</div>
+
+<style>
+.moving-text {
+  width: 100%;
+  overflow: hidden;
+}
+
+.moving-text span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: moveText 8s linear infinite;
+}
+
+@keyframes moveText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+</style>
 </div>
 
 <style>
