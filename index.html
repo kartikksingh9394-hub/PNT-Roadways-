@@ -1,308 +1,206 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <!DOCTYPE html>
-<html lang="hi">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Gaming - Admin Control</title>
+    <title>Navin Ultimate Gaming</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --p: #3b82f6; --s: #10b981; --bg: #020617; --gold: #f59e0b; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; }
-        
-        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 100; }
-        .logo { font-family: 'Orbitron'; color: var(--p); cursor: pointer; }
-        .wallet { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--s); color: var(--s); font-weight: bold; }
-
-        .page { display: none; padding: 20px; animation: fadeIn 0.3s; }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Admin Panel (Hidden) */
-        #admin-panel { display: none; position: fixed; bottom: 20px; left: 20px; background: white; color: black; padding: 15px; border-radius: 10px; z-index: 9999; box-shadow: 0 0 20px gold; }
-        
-        /* Game UI */
-        .screen { background: #000; height: 200px; border-radius: 20px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 400px; }
-        #multi-val { font-family: 'Orbitron'; font-size: 3rem; }
-        
-        .btn-play { background: var(--s); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; max-width: 400px; }
-        .support-btn { background: #25d366; color: white; padding: 10px; border-radius: 50px; position: fixed; bottom: 20px; right: 20px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
-    </style>
-</head>
-<body onclick="initSound()">
-
-    <nav>
-        <div class="logo" onclick="adminTouch()">NAVIN</div>
-        <div class="wallet">₹<span id="balance">0</span></div>
-    </nav>
-
-    <div id="admin-panel">
-        <h4 style="margin:0">Admin Control</h4>
-        <input type="number" id="admin-amt" placeholder="Amount" style="width:80px">
-        <button onclick="adminAdd()" style="background:green; color:white">ADD</button>
-        <button onclick="document.getElementById('admin-panel').style.display='none'">X</button>
-    </div>
-
-    <a href="https://wa.me/919643629394?text=Sir%20maine%20paisa%20bhej%20diya%20hai%20balance%20add%20kardo" class="support-btn">
-        💬 Screenshot Bhejein
-    </a>
-
-    <div id="pg-home" class="page active">
-        <h2>Premium Lobby</h2>
-        <div style="background:#1e293b; padding:20px; border-radius:20px; cursor:pointer" onclick="navTo('pg-aviator')">
-            🚀 <h3>AVIATOR (Working)</h3>
-            <p>Min Bet: ₹10</p>
-        </div>
-        <p style="margin-top:20px; color:gray">More games coming soon...</p>
-    </div>
-
-    <div id="pg-aviator" class="page">
-        <p onclick="navTo('pg-home')" style="cursor:pointer; text-align:left">← Back</p>
-        <div class="screen">
-            <h1 id="multi-val">1.00x</h1>
-            <div id="plane" style="position:absolute; bottom:10px; left:10px; font-size:2rem; display:none;">🚀</div>
-        </div>
-        <input type="number" id="bet-amt" value="10" style="width:100%; max-width:400px; padding:10px; margin-bottom:10px; border-radius:10px; border:none; text-align:center;">
-        <button id="btn-action" class="btn-play" onclick="startAviator()">PLACE BET</button>
-    </div>
-
-    <script>
-        let balance = 0;
-        let running = false;
-        let loop;
-        let multi = 1.00;
-        let touchCount = 0;
-
-        // Admin Function
-        function adminTouch() {
-            touchCount++;
-            if(touchCount >= 3) {
-                document.getElementById('admin-panel').style.display = 'block';
-                touchCount = 0;
-            }
-        }
-        function adminAdd() {
-            let a = parseInt(document.getElementById('admin-amt').value);
-            balance += a;
-            document.getElementById('balance').innerText = balance;
-            alert("Admin: ₹" + a + " Added!");
-        }
-
-        // Navigation
-        function navTo(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
-        function startAviator() {
-            const btn = document.getElementById('btn-action');
-            const txt = document.getElementById('multi-val');
-            const plane = document.getElementById('plane');
-            let bet = parseInt(document.getElementById('bet-amt').value);
-
-            if(!running) {
-                if(balance < bet || bet <= 0) return alert("Paisa kam hai!");
-                balance -= bet;
-                document.getElementById('balance').innerText = balance;
-                running = true; multi = 1.00;
-                let crash = (Math.random() * 3 + 1.2).toFixed(2);
-                btn.innerText = "CASH OUT"; btn.style.background = "orange";
-                plane.style.display = "block";
-
-                loop = setInterval(() => {
-                    multi += 0.05;
-                    txt.innerText = multi.toFixed(2) + "x";
-                    plane.style.transform = `translate(${(multi-1)*40}px, -${(multi-1)*40}px)`;
-
-                    if(multi >= crash) {
-                        clearInterval(loop); running = false;
-                        txt.innerText = "CRASHED"; txt.style.color = "red";
-                        btn.innerText = "PLACE BET"; btn.style.background = "#10b981";
-                        plane.style.display = "none";
-                    }
-                }, 100);
-            } else {
-                clearInterval(loop); running = false;
-                let win = Math.floor(bet * multi);
-                balance += win;
-                document.getElementById('balance').innerText = balance;
-                alert("You Won ₹" + win);
-                btn.innerText = "PLACE BET"; btn.style.background = "#10b981";
-                plane.style.display = "none";
-                txt.innerText = "1.00x";
-            }
-        }
-    </script>
-</body>
-</html>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Pro Gaming Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --p: #3b82f6; --s: #10b981; --d: #ef4444; --bg: #020617; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; overflow-x: hidden; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; overflow-x: hidden; user-select: none; }
         
         /* Navbar */
-        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1e293b; }
-        .logo { font-family: 'Orbitron'; color: var(--p); font-size: 1.2rem; text-shadow: 0 0 10px var(--p); }
-        .wallet { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--s); color: var(--s); font-weight: bold; cursor: pointer; }
+        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.95); border-bottom: 2px solid var(--p); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Orbitron'; color: var(--p); text-shadow: 0 0 10px var(--p); font-size: 1.4rem; }
+        .wallet { background: #000; padding: 8px 15px; border-radius: 30px; border: 1px solid var(--s); color: var(--s); font-weight: bold; font-size: 1.1rem; }
+
+        /* Money Notification Sticker */
+        #money-pop { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--s); color: white; padding: 10px 25px; border-radius: 50px; font-weight: bold; z-index: 2000; transition: 0.5s; box-shadow: 0 5px 20px rgba(16, 185, 129, 0.5); }
 
         /* Page System */
-        .page { display: none; padding: 20px; animation: slide 0.3s ease; }
+        .page { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
         .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-        /* Home Grid */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 10px; }
-        .card { background: #1e293b; padding: 25px 10px; border-radius: 20px; cursor: pointer; border: 1px solid #334155; transition: 0.2s; }
+        /* Game Cards */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .card { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 30px 10px; border-radius: 20px; border: 1px solid #334155; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
         .card:active { transform: scale(0.9); }
+        .card h3 { margin: 10px 0 0 0; font-size: 1rem; color: #fff; }
 
-        /* Game UI */
-        .screen { background: #000; height: 250px; border-radius: 20px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 400px; }
-        #multi-val { font-family: 'Orbitron'; font-size: 3.5rem; transition: 0.1s; z-index: 5; }
-        
-        .controls { max-width: 400px; margin: auto; background: #1e293b; padding: 15px; border-radius: 15px; }
-        .bet-input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: none; background: #0f172a; color: white; text-align: center; font-size: 1.1rem; box-sizing: border-box;}
-        
-        .btn-play { background: var(--s); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-cashout { background: #f59e0b; }
+        /* Aviator Screen */
+        .screen { background: #000; height: 260px; border-radius: 20px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; max-width: 450px; overflow: hidden; }
+        #multi-val { font-family: 'Orbitron'; font-size: 3.5rem; color: white; z-index: 10; text-shadow: 0 0 20px var(--p); }
+        #plane { position: absolute; bottom: 20px; left: 20px; font-size: 2.5rem; z-index: 5; transition: 0.1s linear; display: none; }
 
-        /* Popups */
-        #win-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); border: 2px solid gold; padding: 30px; border-radius: 20px; z-index: 5000; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes pop { from { scale: 0; } to { scale: 1; } }
-        
-        #modal-pay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 6000; }
-        .modal-content { background: white; color: black; width: 80%; max-width: 300px; margin: 100px auto; padding: 20px; border-radius: 15px; text-align: center; }
+        /* Controls */
+        .bet-box { max-width: 450px; margin: auto; background: #1e293b; padding: 20px; border-radius: 20px; border: 1px solid #334155; }
+        input[type="number"] { width: 80%; padding: 12px; border-radius: 10px; border: none; background: #020617; color: #10b981; font-size: 1.2rem; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .btn-main { background: var(--s); color: white; border: none; padding: 15px; width: 90%; border-radius: 15px; font-size: 1.3rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #059669; }
+        .btn-main:active { transform: translateY(3px); box-shadow: none; }
+        .btn-cashout { background: var(--gold); box-shadow: 0 4px 0 #d97706; }
 
-        .back { color: #64748b; cursor: pointer; display: block; margin-bottom: 15px; text-align: left; }
+        .back-btn { text-align: left; color: #64748b; font-size: 1rem; cursor: pointer; margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
-<body onclick="enableAudio()">
+<body onclick="startAllSounds()">
 
-    <audio id="snd-start" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
     <audio id="snd-win" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
     <audio id="snd-lose" src="https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3"></audio>
-    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="snd-money" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+
+    <div id="money-pop">💰 ₹<span id="pop-amt">0</span> Credited!</div>
 
     <nav>
-        <div class="logo">NAVIN</div>
-        <div class="wallet" onclick="showPay()">₹<span id="balance">500</span> <span style="font-size:0.8rem">+</span></div>
+        <div class="logo">NAVIN PRO</div>
+        <div class="wallet" onclick="addMoney(500)">₹<span id="balance">500</span> <span style="font-size: 0.7rem;">+</span></div>
     </nav>
 
-    <div id="win-popup">
-        <h1 style="color: gold; margin: 0;">🏆</h1>
-        <h2 style="margin: 10px 0;">CONGRATULATIONS!</h2>
-        <p id="win-msg" style="font-size: 1.5rem; font-weight: bold; color: var(--s);"></p>
-        <button onclick="closeWin()" style="padding: 10px 20px; border-radius: 10px; border: none; background: var(--p); color: white;">Great!</button>
-    </div>
-
-    <div id="modal-pay">
-        <div class="modal-content">
-            <h3>Add Cash</h3>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9643629394@paytm&pn=Navin%20Gaming" width="150">
-            <p>Paytm: <b>9643629394</b></p>
-            <button onclick="addCash(500)" style="background:green; color:white; padding:10px; width:100%; border:none; border-radius:5px;">I've Paid (Add ₹500)</button>
-            <p onclick="hidePay()" style="cursor:pointer; color: grey; margin-top:10px;">Close</p>
-        </div>
-    </div>
-
     <div id="pg-home" class="page active">
-        <h3 style="color:#64748b">Select Game</h3>
+        <h3 style="color:#64748b; margin-bottom: 20px;">Premium Game Lobby</h3>
         <div class="grid">
-            <div class="card" onclick="nav('pg-aviator')">🚀<br>Aviator</div>
-            <div class="card" onclick="nav('pg-mines')">💣<br>Mines</div>
-            <div class="card" onclick="nav('pg-dice')">🎲<br>Dice</div>
-            <div class="card" onclick="nav('pg-wheel')">🎡<br>Wheel</div>
+            <div class="card" onclick="navTo('pg-aviator')">
+                <span style="font-size: 2.5rem;">🚀</span>
+                <h3>AVIATOR</h3>
+            </div>
+            <div class="card" onclick="alert('Mines Coming Soon!')">
+                <span style="font-size: 2.5rem;">💣</span>
+                <h3>MINES</h3>
+            </div>
+            <div class="card" onclick="alert('Dice Coming Soon!')">
+                <span style="font-size: 2.5rem;">🎲</span>
+                <h3>DICE</h3>
+            </div>
+            <div class="card" onclick="alert('Wheel Coming Soon!')">
+                <span style="font-size: 2.5rem;">🎡</span>
+                <h3>WHEEL</h3>
+            </div>
         </div>
+        <p style="margin-top: 30px; font-size: 0.8rem; color: #334155;">Click anywhere to start Music 🎵</p>
     </div>
 
     <div id="pg-aviator" class="page">
-        <span class="back" onclick="nav('pg-home')">← Lobby</span>
+        <div class="back-btn" onclick="navTo('pg-home')">← Back to Lobby</div>
         <div class="screen">
             <h1 id="multi-val">1.00x</h1>
-            <div id="plane" style="position:absolute; bottom:10px; left:10px; font-size:2.5rem; display:none;">🚀</div>
+            <div id="plane">🚀</div>
         </div>
-        <div class="controls">
-            <input type="number" id="bet-amt" class="bet-input" value="10" placeholder="Enter Bet Amount">
-            <button id="btn-action" class="btn-play" onclick="handleAviator()">PLACE BET</button>
+        <div class="bet-box">
+            <input type="number" id="bet-amt" value="10">
+            <button id="btn-play" class="btn-main" onclick="handleAviator()">PLACE BET</button>
         </div>
     </div>
 
     <script>
         let balance = 500;
         let isRunning = false;
-        let gameLoop;
+        let gameInterval;
         let currentMulti = 1.00;
+        let musicStarted = false;
 
-        function enableAudio() { document.querySelectorAll('audio').forEach(a => { a.play(); a.pause(); }); }
-        function playS(id) { let s = document.getElementById('snd-'+id); s.currentTime=0; s.play(); }
+        // Sabse important function: Pehle click par music chalu karne ke liye
+        function startAllSounds() {
+            if(!musicStarted) {
+                let bg = document.getElementById('bg-music');
+                bg.volume = 0.2; // Halki awaaz
+                bg.play().catch(e => console.log("Music wait for interaction"));
+                musicStarted = true;
+            }
+        }
 
-        function nav(id) { playS('click'); document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+        function playS(id) {
+            let s = document.getElementById('snd-' + id);
+            if(s) { s.currentTime = 0; s.play(); }
+        }
 
-        function showPay() { document.getElementById('modal-pay').style.display='block'; }
-        function hidePay() { document.getElementById('modal-pay').style.display='none'; }
-        function addCash(amt) { balance += amt; updateBal(); hidePay(); playS('win'); }
-        function updateBal() { document.getElementById('balance').innerText = balance; }
+        function navTo(id) {
+            playS('click');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
-        function closeWin() { document.getElementById('win-popup').style.display='none'; }
+        function showMoneyPop(amt) {
+            playS('money');
+            let pop = document.getElementById('money-pop');
+            document.getElementById('pop-amt').innerText = amt;
+            pop.style.top = "20px";
+            setTimeout(() => { pop.style.top = "-100px"; }, 3000);
+        }
 
-        // --- AVIATOR LOGIC ---
+        function addMoney(amt) {
+            balance += amt;
+            updateUI();
+            showMoneyPop(amt);
+        }
+
+        function updateUI() {
+            document.getElementById('balance').innerText = balance;
+        }
+
+        // AVIATOR GAME LOGIC
         function handleAviator() {
-            const btn = document.getElementById('btn-action');
+            const btn = document.getElementById('btn-play');
             const txt = document.getElementById('multi-val');
             const plane = document.getElementById('plane');
-            const betInput = document.getElementById('bet-amt');
-            let bet = parseInt(betInput.value);
+            let bet = parseInt(document.getElementById('bet-amt').value);
 
             if(!isRunning) {
-                if(isNaN(bet) || bet <= 0 || bet > balance) return alert("Sahi bet lagao bhai!");
-                
-                // START
-                balance -= bet; updateBal();
+                if(isNaN(bet) || bet <= 0 || bet > balance) {
+                    alert("Sahi amount daalo!");
+                    return;
+                }
+
+                // START GAME
+                playS('click');
+                balance -= bet;
+                updateUI();
                 isRunning = true;
                 currentMulti = 1.00;
-                let crashPoint = (Math.random() * 4 + 1.1).toFixed(2);
-                
-                playS('start');
+                let crashPoint = (Math.random() * 5 + 1.1).toFixed(2);
+
                 btn.innerText = "CASH OUT";
                 btn.classList.add('btn-cashout');
-                plane.style.display = 'block';
+                plane.style.display = "block";
                 txt.style.color = "white";
 
-                gameLoop = setInterval(() => {
+                gameInterval = setInterval(() => {
                     currentMulti += 0.04;
                     txt.innerText = currentMulti.toFixed(2) + "x";
-                    let move = (currentMulti - 1) * 35;
-                    plane.style.transform = `translate(${move}px, -${move}px)`;
+                    
+                    // Plane Animation
+                    let pos = (currentMulti - 1) * 35;
+                    plane.style.transform = `translate(${pos}px, -${pos}px)`;
 
                     if(currentMulti >= crashPoint) {
-                        clearInterval(gameLoop);
+                        // GAME CRASHED
+                        clearInterval(gameInterval);
                         isRunning = false;
-                        txt.innerText = "CRASHED";
+                        playS('lose');
+                        txt.innerText = "CRASHED!";
                         txt.style.color = "red";
                         btn.innerText = "PLACE BET";
                         btn.classList.remove('btn-cashout');
-                        plane.style.display = 'none';
-                        playS('lose');
+                        plane.style.display = "none";
                     }
                 }, 100);
+
             } else {
                 // CASH OUT
-                clearInterval(gameLoop);
+                clearInterval(gameInterval);
                 isRunning = false;
-                let win = Math.floor(bet * currentMulti);
-                balance += win; updateBal();
-                
+                let winAmt = Math.floor(bet * currentMulti);
+                balance += winAmt;
+                updateUI();
+                showMoneyPop(winAmt);
                 playS('win');
-                document.getElementById('win-msg').innerText = "You Won ₹" + win;
-                document.getElementById('win-popup').style.display = 'block';
                 
                 btn.innerText = "PLACE BET";
                 btn.classList.remove('btn-cashout');
-                plane.style.display = 'none';
+                plane.style.display = "none";
+                txt.innerText = currentMulti.toFixed(2) + "x";
+                txt.style.color = "#10b981";
             }
         }
     </script>
