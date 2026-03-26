@@ -122,7 +122,139 @@
         <div class="logo">NAVIN</div>
         <a href="#" class="login-btn">Login / Register</a>
     </nav>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navin Gaming - Sounds & Action</title>
+    <style>
+        :root { --primary: #3b82f6; --accent: #10b981; --bg: #0f172a; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); color: white; text-align: center; }
+        
+        /* Pages Logic */
+        .page { display: none; padding: 20px; }
+        .active-page { display: block; }
 
+        nav { display: flex; justify-content: space-between; padding: 15px; background: #1e293b; align-items: center; }
+        .wallet-box { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent); }
+
+        /* Game Cards */
+        .games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 15px; cursor: pointer; border: 1px solid #334155; }
+        
+        /* Aviator Game UI */
+        .aviator-screen { background: #000; height: 200px; margin: 20px 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        #multi { font-size: 3rem; font-weight: bold; }
+        .btn-bet { background: var(--accent); color: white; padding: 15px; width: 100%; border: none; border-radius: 10px; font-size: 1.2rem; cursor: pointer; }
+        .back-btn { background: #475569; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; float: left; }
+    </style>
+</head>
+<body>
+
+    <audio id="click-sound" src="https://www.soundjay.com/buttons/button-16.mp3"></audio>
+    <audio id="win-sound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
+    <audio id="loss-sound" src="https://www.soundjay.com/buttons/button-10.mp3"></audio>
+
+    <nav>
+        <div style="font-weight:bold; color:var(--primary)">NAVIN</div>
+        <div class="wallet-box">₹<span id="balance">500</span></div>
+    </nav>
+
+    <div id="home-page" class="page active-page">
+        <h2>Sabhi Games</h2>
+        <div class="games-grid">
+            <div class="card" onclick="openGame('aviator')">🚀<br>Aviator</div>
+            <div class="card" onclick="openGame('mines')">💣<br>Mines</div>
+            <div class="card" onclick="openGame('dice')">🎲<br>Dice</div>
+            <div class="card" onclick="openGame('wheel')">🎡<br>Wheel</div>
+        </div>
+    </div>
+
+    <div id="aviator-page" class="page">
+        <button class="back-btn" onclick="goHome()">← Back</button>
+        <h3>Aviator 🚀</h3>
+        <div class="aviator-screen">
+            <div id="multi">1.00x</div>
+        </div>
+        <button id="action-btn" class="btn-bet" onclick="startAviator()">Bet ₹10</button>
+    </div>
+
+    <div id="other-page" class="page">
+        <button class="back-btn" onclick="goHome()">← Back</button>
+        <h2 id="game-title">Game</h2>
+        <p>Yeh game jald hi aa raha hai!</p>
+    </div>
+
+    <script>
+        let balance = 500;
+        let running = false;
+        let timer;
+
+        // Sounds
+        function playSound(id) { document.getElementById(id).play(); }
+
+        // Navigation
+        function openGame(game) {
+            playSound('click-sound');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            if(game === 'aviator') {
+                document.getElementById('aviator-page').classList.add('active-page');
+            } else {
+                document.getElementById('game-title').innerText = game.toUpperCase();
+                document.getElementById('other-page').classList.add('active-page');
+            }
+        }
+
+        function goHome() {
+            playSound('click-sound');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.getElementById('home-page').classList.add('active-page');
+        }
+
+        // Aviator Logic
+        function startAviator() {
+            if(running) {
+                // Cash Out
+                running = false;
+                clearInterval(timer);
+                let val = parseFloat(document.getElementById('multi').innerText);
+                let win = Math.floor(10 * val);
+                balance += win;
+                document.getElementById('balance').innerText = balance;
+                document.getElementById('action-btn').innerText = "Bet ₹10";
+                playSound('win-sound');
+                alert("You Won ₹" + win + "!");
+                return;
+            }
+
+            // Start Game
+            if(balance < 10) return alert("Paisa nahi hai!");
+            balance -= 10;
+            document.getElementById('balance').innerText = balance;
+            running = true;
+            let current = 1.00;
+            let crash = (Math.random() * 3 + 1.1).toFixed(2); 
+            document.getElementById('action-btn').innerText = "CASH OUT";
+            playSound('click-sound');
+
+            timer = setInterval(() => {
+                current += 0.05;
+                document.getElementById('multi').innerText = current.toFixed(2) + "x";
+                
+                if(current >= crash) {
+                    clearInterval(timer);
+                    running = false;
+                    document.getElementById('multi').innerText = "CRASHED!";
+                    document.getElementById('action-btn').innerText = "Bet ₹10";
+                    playSound('loss-sound');
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
+    
     <div class="hero">
         <h2>India's No. 1 Gaming Hub</h2>
         <p>Kheliye apne favorite games aur jeetiye bade inaam!</p>
