@@ -171,6 +171,148 @@
         &copy; 2026 Navin Gaming Portal. All Rights Reserved. <br>
         <small>Responsible gaming is advised.</small>
     </footer>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navin Aviator - Play Now</title>
+    <style>
+        :root { --primary: #3b82f6; --danger: #ef4444; --bg: #0f172a; }
+        body { margin: 0; font-family: 'Arial', sans-serif; background: var(--bg); color: white; overflow-x: hidden; }
+        
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; padding: 15px; background: #1e293b; align-items: center; border-bottom: 2px solid var(--primary); }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); letter-spacing: 2px; }
+        .wallet { background: #000; padding: 8px 15px; border-radius: 20px; border: 1px solid #10b981; font-weight: bold; }
 
+        /* Game Area */
+        .game-container { max-width: 600px; margin: 20px auto; background: #000; height: 300px; border-radius: 15px; position: relative; border: 2px solid #334155; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        #multiplier { font-size: 4rem; font-weight: bold; color: white; z-index: 10; }
+        #plane { position: absolute; bottom: 20px; left: 20px; font-size: 3rem; transition: transform 0.1s linear; display: none; }
+        .crash-text { color: var(--danger); font-size: 2rem; display: none; z-index: 20; position: absolute; }
+
+        /* Controls */
+        .controls { max-width: 600px; margin: 20px auto; padding: 20px; background: #1e293b; border-radius: 15px; text-align: center; }
+        .bet-input { width: 80%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: none; font-size: 1rem; }
+        .btn { width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        #bet-btn { background: #10b981; color: white; }
+        #cashout-btn { background: #f59e0b; color: white; display: none; }
+
+        /* Deposit Modal */
+        #deposit-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: #000; padding: 20px; border-radius: 15px; z-index: 1000; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NAVIN</div>
+        <div class="wallet">₹<span id="balance">0</span></div>
+        <button onclick="openModal()" style="background:#10b981; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;">ADD</button>
+    </nav>
+
+    <div class="game-container">
+        <div id="multiplier">1.00x</div>
+        <div id="plane">🚀</div>
+        <div class="crash-text" id="crash-msg">FLEW AWAY!</div>
+    </div>
+
+    <div class="controls">
+        <input type="number" id="bet-amount" class="bet-input" placeholder="Enter Bet (e.g. 10)">
+        <button id="bet-btn" class="btn" onclick="startGame()">PLACE BET</button>
+        <button id="cashout-btn" class="btn" onclick="cashOut()">CASH OUT</button>
+    </div>
+
+    <div id="deposit-modal">
+        <h3>Deposit to Wallet</h3>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9643629394@paytm&pn=Navin%20Gaming" width="150">
+        <p>Pay to: <b>9643629394</b></p>
+        <button onclick="addDemoCash()" style="width:100%; padding:10px; background:blue; color:white; border:none; border-radius:5px;">I have Paid (Add ₹500)</button>
+        <p onclick="closeModal()" style="cursor:pointer; font-size:12px; margin-top:10px;">Close</p>
+    </div>
+
+    <script>
+        let balance = 0;
+        let currentBet = 0;
+        let multi = 1.00;
+        let gameInterval;
+        let isFlying = false;
+
+        function openModal() { document.getElementById('deposit-modal').style.display = 'block'; }
+        function closeModal() { document.getElementById('deposit-modal').style.display = 'none'; }
+        
+        function addDemoCash() {
+            balance += 500;
+            document.getElementById('balance').innerText = balance;
+            closeModal();
+            alert("₹500 added! Ab kheliye.");
+        }
+
+        function startGame() {
+            let bet = parseInt(document.getElementById('bet-amount').value);
+            if (isNaN(bet) || bet > balance || bet <= 0) {
+                alert("Balance check karein ya sahi amount daalein!");
+                return;
+            }
+
+            // Setup
+            balance -= bet;
+            currentBet = bet;
+            document.getElementById('balance').innerText = balance;
+            isFlying = true;
+            multi = 1.00;
+            
+            document.getElementById('bet-btn').style.display = 'none';
+            document.getElementById('cashout-btn').style.display = 'block';
+            document.getElementById('plane').style.display = 'block';
+            document.getElementById('crash-msg').style.display = 'none';
+            document.getElementById('multiplier').style.color = 'white';
+
+            // Plane animation logic
+            let crashPoint = (Math.random() * 5 + 1).toFixed(2); // Random crash between 1.0x and 6.0x
+            
+            gameInterval = setInterval(() => {
+                multi += 0.01;
+                document.getElementById('multiplier').innerText = multi.toFixed(2) + "x";
+                
+                // Move plane
+                let move = (multi - 1) * 50;
+                document.getElementById('plane').style.transform = `translate(${move}px, -${move}px)`;
+
+                if (multi >= crashPoint) {
+                    crashGame();
+                }
+            }, 100);
+        }
+
+        function cashOut() {
+            if (!isFlying) return;
+            let winAmount = Math.floor(currentBet * multi);
+            balance += winAmount;
+            document.getElementById('balance').innerText = balance;
+            alert("Badhai ho! Aapne ₹" + winAmount + " jeete!");
+            resetGame();
+        }
+
+        function crashGame() {
+            isFlying = false;
+            clearInterval(gameInterval);
+            document.getElementById('multiplier').style.color = 'red';
+            document.getElementById('crash-msg').style.display = 'block';
+            document.getElementById('plane').style.display = 'none';
+            setTimeout(resetGame, 2000);
+        }
+
+        function resetGame() {
+            isFlying = false;
+            clearInterval(gameInterval);
+            document.getElementById('bet-btn').style.display = 'block';
+            document.getElementById('cashout-btn').style.display = 'none';
+            document.getElementById('plane').style.transform = `translate(0,0)`;
+        }
+    </script>
+</body>
+</html>
+    
 </body>
 </html>
