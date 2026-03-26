@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Withdraw</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="font-family:Arial; background:#0d6efd; color:white; text-align:center;">
+
+<h2>💸 Withdraw Money</h2>
+
+<div style="background:white; color:black; margin:20px; padding:20px; border-radius:15px;">
+
+<p style="color:red; font-weight:bold;">
+⚡ Minimum Withdrawal ₹100
+</p>
+
+<input type="text" id="wname" placeholder="Enter Your Name"><br><br>
+<input type="text" id="wupi" placeholder="Enter UPI ID"><br><br>
+<input type="number" id="wamount" placeholder="Enter Amount"><br><br>
+
+<button onclick="withdraw()" style="padding:10px; background:red; color:white; border:none;">
+💸 Withdraw Now
+</button>
+
+<br><br>
+<button onclick="goBack()">⬅ Back</button>
+
+</div>
+
+<script>
+function withdraw(){
+  var name = document.getElementById("wname").value;
+  var upi = document.getElementById("wupi").value;
+  var amount = document.getElementById("wamount").value;
+
+  var msg = "Withdrawal Request%0A"
+  + "Name: " + name + "%0A"
+  + "UPI: " + upi + "%0A"
+  + "Amount: ₹" + amount;
+
+  window.open("https://wa.me/919643629394?text=" + msg);
+}
+
+function goBack(){
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
