@@ -1,6 +1,143 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+    <!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navin Gaming - Admin Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --p: #3b82f6; --s: #10b981; --bg: #020617; --gold: #f59e0b; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; }
+        
+        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 100; }
+        .logo { font-family: 'Orbitron'; color: var(--p); cursor: pointer; }
+        .wallet { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--s); color: var(--s); font-weight: bold; }
+
+        .page { display: none; padding: 20px; animation: fadeIn 0.3s; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Admin Panel (Hidden) */
+        #admin-panel { display: none; position: fixed; bottom: 20px; left: 20px; background: white; color: black; padding: 15px; border-radius: 10px; z-index: 9999; box-shadow: 0 0 20px gold; }
+        
+        /* Game UI */
+        .screen { background: #000; height: 200px; border-radius: 20px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 400px; }
+        #multi-val { font-family: 'Orbitron'; font-size: 3rem; }
+        
+        .btn-play { background: var(--s); color: white; border: none; padding: 15px; width: 100%; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; max-width: 400px; }
+        .support-btn { background: #25d366; color: white; padding: 10px; border-radius: 50px; position: fixed; bottom: 20px; right: 20px; text-decoration: none; font-size: 0.8rem; font-weight: bold; }
+    </style>
+</head>
+<body onclick="initSound()">
+
+    <nav>
+        <div class="logo" onclick="adminTouch()">NAVIN</div>
+        <div class="wallet">₹<span id="balance">0</span></div>
+    </nav>
+
+    <div id="admin-panel">
+        <h4 style="margin:0">Admin Control</h4>
+        <input type="number" id="admin-amt" placeholder="Amount" style="width:80px">
+        <button onclick="adminAdd()" style="background:green; color:white">ADD</button>
+        <button onclick="document.getElementById('admin-panel').style.display='none'">X</button>
+    </div>
+
+    <a href="https://wa.me/919643629394?text=Sir%20maine%20paisa%20bhej%20diya%20hai%20balance%20add%20kardo" class="support-btn">
+        💬 Screenshot Bhejein
+    </a>
+
+    <div id="pg-home" class="page active">
+        <h2>Premium Lobby</h2>
+        <div style="background:#1e293b; padding:20px; border-radius:20px; cursor:pointer" onclick="navTo('pg-aviator')">
+            🚀 <h3>AVIATOR (Working)</h3>
+            <p>Min Bet: ₹10</p>
+        </div>
+        <p style="margin-top:20px; color:gray">More games coming soon...</p>
+    </div>
+
+    <div id="pg-aviator" class="page">
+        <p onclick="navTo('pg-home')" style="cursor:pointer; text-align:left">← Back</p>
+        <div class="screen">
+            <h1 id="multi-val">1.00x</h1>
+            <div id="plane" style="position:absolute; bottom:10px; left:10px; font-size:2rem; display:none;">🚀</div>
+        </div>
+        <input type="number" id="bet-amt" value="10" style="width:100%; max-width:400px; padding:10px; margin-bottom:10px; border-radius:10px; border:none; text-align:center;">
+        <button id="btn-action" class="btn-play" onclick="startAviator()">PLACE BET</button>
+    </div>
+
+    <script>
+        let balance = 0;
+        let running = false;
+        let loop;
+        let multi = 1.00;
+        let touchCount = 0;
+
+        // Admin Function
+        function adminTouch() {
+            touchCount++;
+            if(touchCount >= 3) {
+                document.getElementById('admin-panel').style.display = 'block';
+                touchCount = 0;
+            }
+        }
+        function adminAdd() {
+            let a = parseInt(document.getElementById('admin-amt').value);
+            balance += a;
+            document.getElementById('balance').innerText = balance;
+            alert("Admin: ₹" + a + " Added!");
+        }
+
+        // Navigation
+        function navTo(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function startAviator() {
+            const btn = document.getElementById('btn-action');
+            const txt = document.getElementById('multi-val');
+            const plane = document.getElementById('plane');
+            let bet = parseInt(document.getElementById('bet-amt').value);
+
+            if(!running) {
+                if(balance < bet || bet <= 0) return alert("Paisa kam hai!");
+                balance -= bet;
+                document.getElementById('balance').innerText = balance;
+                running = true; multi = 1.00;
+                let crash = (Math.random() * 3 + 1.2).toFixed(2);
+                btn.innerText = "CASH OUT"; btn.style.background = "orange";
+                plane.style.display = "block";
+
+                loop = setInterval(() => {
+                    multi += 0.05;
+                    txt.innerText = multi.toFixed(2) + "x";
+                    plane.style.transform = `translate(${(multi-1)*40}px, -${(multi-1)*40}px)`;
+
+                    if(multi >= crash) {
+                        clearInterval(loop); running = false;
+                        txt.innerText = "CRASHED"; txt.style.color = "red";
+                        btn.innerText = "PLACE BET"; btn.style.background = "#10b981";
+                        plane.style.display = "none";
+                    }
+                }, 100);
+            } else {
+                clearInterval(loop); running = false;
+                let win = Math.floor(bet * multi);
+                balance += win;
+                document.getElementById('balance').innerText = balance;
+                alert("You Won ₹" + win);
+                btn.innerText = "PLACE BET"; btn.style.background = "#10b981";
+                plane.style.display = "none";
+                txt.innerText = "1.00x";
+            }
+        }
+    </script>
+</body>
+</html>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navin Pro Gaming Hub</title>
