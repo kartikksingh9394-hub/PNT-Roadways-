@@ -1,435 +1,176 @@
 <!DOCTYPE html>
-<html>
-  <style>
-  /* Isse text ko gradient aur background premium milega */
-  .premium-section {
-      background-color: #000; /* Background kala karne ke liye */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 100px 0;
-  }
-
-  .premium-text {
-      font-size: 80px;
-      font-weight: 800;
-      text-align: center;
-      background: linear-gradient(to bottom, #888 0%, #000 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      position: absolute;
-      top: 50px;
-      z-index: 1;
-  }
-
-  .phone-image {
-      width: 80%;
-      max-width: 400px;
-      transform: rotate(-10deg); /* Phone ko thoda teda karne ke liye */
-      z-index: 2;
-      margin-top: 60px;
-  }
-  </style>
-  
+<html lang="hi">
 <head>
-  <style>
-  .ig-top-container {
-    display: flex;
-    justify-content: center; /* Button ko beech mein karne ke liye */
-    padding: 20px 0;
-    width: 100%;
-    background-color: #fcfcfc; /* Halka background taaki alag dikhe */
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .ig-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    color: white !important;
-    text-decoration: none !important;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    font-weight: 600;
-    border-radius: 8px; /* Thoda square-ish modern look */
-    transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navin Gaming - Play & Win</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #ef4444;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+        }
 
-  .ig-button:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-  }
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            text-align: center;
+        }
 
-  .ig-icon-svg {
-    margin-right: 8px;
-  }
-</style>
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-<div class="ig-top-container">
-  <a href="https://www.instagram.com/thakurnavinn23_" target="_blank" class="ig-button">
-    <svg class="ig-icon-svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    Follow @thakurnavinn23_
-  </a>
-</div>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PNT ROADWAYS </title>
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
 
-  <!-- Mobile fit fix -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #f0f2f5;
-      scroll-behavior: smooth;
-    }
+        .login-btn:hover { background: #2563eb; }
 
-    section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+        /* Hero Section */
+        .hero {
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+        }
 
-    .page1 {
-      background: linear-gradient(135deg, #0d6efd, #00c6ff);
-      color: white;
-      text-align: center;
-    }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
 
-    .page1 h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px 5%;
+        }
 
-    .btn {
-      padding: 12px 20px;
-      background: white;
-      color: #0d6efd;
-      border-radius: 25px;
-      text-decoration: none;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .page2 {
-      background: white;
-      text-align: center;
-      padding: 20px;
-    }
+        .game-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+        .game-icon { font-size: 3rem; margin-bottom: 15px; }
 
-    button {
-      padding: 12px;
-      width: 90%;
-      border: none;
-      border-radius: 25px;
-      background: #0d6efd;
-      color: white;
-      font-size: 16px;
-    }
+        .tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
 
-    .page3 {
-      background: #222;
-      color: white;
-      text-align: center;
-    }
-  </style>
+        .tag-hot { background: var(--secondary); }
+        .tag-new { background: #10b981; }
+
+        .play-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .play-btn:hover { background: var(--primary); }
+
+        footer { padding: 40px; color: #64748b; font-size: 0.9rem; }
+    </style>
 </head>
-
 <body>
-  <button onclick="openForm()">🚀 Book Truck</button>
-  <a href="#book" style="
-display:block;
-background:red;
-color:white;
-padding:12px;
-text-align:center;
-font-size:18px;
-font-weight:bold;
-text-decoration:none;
-">
-🚀 Book Truck Now
-  </a>
-  <h1 style="
-text-align:center;
-font-size:30px;
-color:#fff;
-background:linear-gradient(90deg,#0d6efd,#00c6ff);
-padding:10px;
-border-radius:10px;
-margin:10px;
-">
-🚚 PNT Roadways
-  </h1>
-  <div class="sale-badge">
-🔥 All India Service Available
-</div>
 
-<style>
-.sale-badge{
-  display:inline-block;
-  background:red;
-  color:white;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:14px;
-  font-weight:bold;
-  margin-top:5px;
-  animation: bounce 1.2s infinite;
-}
+    <nav>
+        <div class="logo">NAVIN</div>
+        <a href="#" class="login-btn">Login / Register</a>
+    </nav>
 
-/* Bounce Animation */
-@keyframes bounce{
-  0%,100%{transform: translateY(0);}
-  50%{transform: translateY(-5px);}
-}
-</style>
-</div>
+    <div class="hero">
+        <h2>India's No. 1 Gaming Hub</h2>
+        <p>Kheliye apne favorite games aur jeetiye bade inaam!</p>
+    </div>
 
-<style>
-.moving-text {
-  width: 100%;
-  overflow: hidden;
-}
+    <div class="games-grid">
+        <div class="game-card">
+            <span class="tag tag-hot">POPULAR</span>
+            <div class="game-icon">🚀</div>
+            <h3>Aviator</h3>
+            <p>Predict the flight and cash out instantly.</p>
+            <a href="#" class="play-btn">Play Now</a>
+        </div>
 
-.moving-text span {
-  display: inline-block;
-  white-space: nowrap;
-  animation: moveText 8s linear infinite;
-}
+        <div class="game-card">
+            <span class="tag tag-new">NEW</span>
+            <div class="game-icon">💣</div>
+            <h3>Mines</h3>
+            <p>Find the diamonds, avoid the bombs.</p>
+            <a href="#" class="play-btn">Play Now</a>
+        </div>
 
-@keyframes moveText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-</style>
-</div>
+        <div class="game-card">
+            <div class="game-icon">🎲</div>
+            <h3>Dice Roll</h3>
+            <p>Classic high-low multiplier game.</p>
+            <a href="#" class="play-btn">Play Now</a>
+        </div>
 
-<style>
-.moving-text {
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: 32px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px #fff, 0 0 20px #0d6efd, 0 0 30px #00c6ff;
-}
-.moving-text span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: moveText 8s linear infinite;
-}
+        <div class="game-card">
+            <div class="game-icon">🎡</div>
+            <h3>Lucky Wheel</h3>
+            <p>Spin the wheel for mega rewards.</p>
+            <a href="#" class="play-btn">Play Now</a>
+        </div>
 
-.moving-text {
-  display: inline-block;
-  padding-left: 100%;
-  animation: moveText 8s linear infinite;
-}
+        <div class="game-card">
+            <div class="game-icon">🃏</div>
+            <h3>Teen Patti</h3>
+            <p>The ultimate Indian card game experience.</p>
+            <a href="#" class="play-btn">Play Now</a>
+        </div>
+    </div>
 
-@keyframes moveText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-</style>
+    <footer>
+        &copy; 2026 Navin Gaming Portal. All Rights Reserved. <br>
+        <small>Responsible gaming is advised.</small>
+    </footer>
 
-<!-- PAGE 1 -->
-<section class="page1">
-  <h1>🚚 PNT Roadways</h1>
-  <p style="font-weight:bold; color:yellow;">
-🚚 Trusted Transport Service in Greater Noida
-  </p>
-<p>Owner: Navin Thakur</p>
-  <p style="color:gray;">Fast, Safe & Reliable Transport Service 🚛</p>
-  <p>Fast & Safe Delivery Service</p>
-  <a href="#book" class="btn">Book Now ↓</a>
-</section>
-
-<!-- PAGE 2 -->
-<section class="page2" id="book">
-  <h2>Book Your Truck</h2>
-  <!-- Modern Glow Button -->
-<button class="button" onclick="location.href='secondpage.html'">Go to 2nd Page</button>
-
-<style>
-.button {
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
-  color: white;
-  padding: 15px 35px;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(255, 65, 108, 0.5);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Glow Effect */
-.button::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
-  transform: scale(0);
-  transition: transform 0.5s;
-}
-
-.button:hover::after {
-  transform: scale(1);
-}
-
-/* Hover Animation */
-.button:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 65, 108, 0.7);
-  background: linear-gradient(90deg, #ff4b2b, #ff416c);
-
-  <input type="text" id="name" placeholder="Your Name">
-  <input type="text" id="phone" placeholder="Phone Number">
-  <input type="text" id="pickup" placeholder="Pickup Location">
-  <input type="text" id="drop" placeholder="Drop Location">
-
-  <button onclick="send()">Book on WhatsApp</button>
-  <br><br>
-<a href="tel:9990109968" style="
-padding:10px 20px;
-background:green;
-color:white;
-text-decoration:none;
-border-radius:5px;
-">
-📞 Call Now
-</a>
-</section>
-
-<!-- PAGE 3 -->
-<section class="page3">
-  <h2>Book Your Truck</h2>
-  <h2>Contact Us</h2>
-  <p>📞 9990109968</p>
-  <p>📍 Greater Noida</p>
-  <p>Easy booking in just one click 📲</p>
-</section>
-
-<script>
-function send(){
-var n=document.getElementById("name").value;
-var p=document.getElementById("phone").value;
-var pi=document.getElementById("pickup").value;
-var d=document.getElementById("drop").value;
-
-var msg="Booking:%0AName:"+n+"%0APhone:"+p+"%0APickup:"+pi+"%0ADrop:"+d;
-
-window.open("https://wa.me/919990109968?text="+msg);
-}
-</script>
-<div style="background:white; padding:15px; margin:15px; border-radius:10px;">
-  <h3>Why Choose Us?</h3>
-  <p>✔ Fast Delivery</p>
-  <p>✔ Safe Transport</p>
-  <p>✔ Affordable Price</p>
-  <p>✔ 24/7 Support</p>
-</div>
-  <div style="background:#f9f9f9; padding:15px; margin:15px; border-radius:10px;">
-  <h3>Customer Reviews ⭐</h3>
-  
-  <p>⭐️⭐️⭐️⭐️⭐️  
-  "Bahut fast delivery mili, service best hai!"</p>
-
-  <p>⭐️⭐️⭐️⭐️⭐️  
-  "Safe transport, saman bilkul theek pahucha 👍"</p>
-
-  <p>⭐️⭐️⭐️⭐️⭐️  
-  "Driver time pe aaya, highly recommended"</p>
-  </div>
-  <div style="margin:15px;">
-  <h3>Our Location 📍</h3>
-  <iframe 
-    src="https://maps.google.com/maps?q=greater%20noida&t=&z=13&ie=UTF8&iwloc=&output=embed"
-    width="100%" height="200" style="border:0;">
-  </iframe>
-  </div>
-  <!-- Floating Enquiry Button -->
-<a href="https://wa.me/919990109968?text=Hello%20PNT%20Roadways%2C%20mujhe%20enquiry%20karni%20hai"
-class="enquiry-btn">💬 Enquiry</a>
-
-<style>
-.enquiry-btn{
-  position: fixed;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #25D366;
-  color: white;
-  padding: 12px 15px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce{
-  0%,100%{transform: translateY(-50%);}
-  50%{transform: translateY(-60%);}
-}
-</style>
-  <!-- Advanced Floating Button -->
-<a href="https://wa.me/919990109968?text=Hello%20PNT%20Roadways%2C%20mujhe%20enquiry%20karni%20hai" 
-class="float-btn" target="_blank">
-
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="25">
-  <span>Chat</span>
-
-</a>
-
-<style>
-.float-btn{
-  position: fixed;
-  bottom: 20px;
-  right: 15px;
-  background: #25D366;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: pulse 1.5s infinite;
-}
-
-.float-btn img{
-  border-radius: 50%;
-}
-
-@keyframes pulse{
-  0%{box-shadow: 0 0 0 0 rgba(37,211,102,0.7);}
-  70%{box-shadow: 0 0 0 15px rgba(37,211,102,0);}
-  100%{box-shadow: 0 0 0 0 rgba(37,211,102,0);}
-}
-</style>
 </body>
 </html>
