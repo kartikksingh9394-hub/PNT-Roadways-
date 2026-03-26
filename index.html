@@ -3,187 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Gaming - Play & Win</title>
+    <title>Navin All-In-One Gaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #3b82f6;
-            --secondary: #ef4444;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
-            color: white;
-            text-align: center;
-        }
-
+        :root { --p: #3b82f6; --s: #10b981; --d: #ef4444; --bg: #020617; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; overflow-x: hidden; }
+        
         /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: rgba(15, 23, 42, 0.9);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1e293b; }
+        .logo { font-family: 'Orbitron'; color: var(--p); font-size: 1.2rem; }
+        .wallet { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--s); color: var(--s); font-weight: bold; }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-        }
+        /* Page System */
+        .page { display: none; padding: 20px; animation: slide 0.3s ease; }
+        .active { display: block; }
+        @keyframes slide { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
 
-        .login-btn {
-            background: var(--primary);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+        /* Home Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 10px; }
+        .card { background: #1e293b; padding: 30px 10px; border-radius: 20px; cursor: pointer; border: 1px solid #334155; transition: 0.2s; }
+        .card:active { transform: scale(0.9); }
+        .card i { font-size: 2.5rem; display: block; margin-bottom: 10px; }
 
-        .login-btn:hover { background: #2563eb; }
+        /* Game UI */
+        .screen { background: #000; height: 220px; border-radius: 15px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; max-width: 400px; }
+        .btn-play { background: var(--s); color: white; border: none; padding: 15px; width: 100%; max-width: 400px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        .back { color: #64748b; cursor: pointer; display: block; margin-bottom: 20px; text-align: left; }
 
-        /* Hero Section */
-        .hero {
-            padding: 60px 20px;
-            background: linear-gradient(to bottom, #1e293b, #0f172a);
-        }
-
-        .hero h2 { font-size: 2.5rem; margin-bottom: 10px; }
-
-        /* Games Grid */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            padding: 40px 5%;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid #334155;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-card:hover {
-            transform: scale(1.05);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .game-icon { font-size: 3rem; margin-bottom: 15px; }
-
-        .tag {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 4px 12px;
-            border-radius: 5px;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        .tag-hot { background: var(--secondary); }
-        .tag-new { background: #10b981; }
-
-        .play-btn {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-
-        .play-btn:hover { background: var(--primary); }
-
-        footer { padding: 40px; color: #64748b; font-size: 0.9rem; }
+        /* Mines Grid */
+        .mines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 250px; margin: auto; }
+        .tile { width: 70px; height: 70px; background: #334155; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; }
     </style>
 </head>
-<body>
+<body onclick="initAudio()">
+
+    <audio id="s-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="s-win" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+    <audio id="s-lose" src="https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3"></audio>
 
     <nav>
         <div class="logo">NAVIN</div>
-        <a href="#" class="login-btn">Login / Register</a>
-    </nav>
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Gaming - Sounds & Action</title>
-    <style>
-        :root { --primary: #3b82f6; --accent: #10b981; --bg: #0f172a; }
-        body { margin: 0; font-family: sans-serif; background: var(--bg); color: white; text-align: center; }
-        
-        /* Pages Logic */
-        .page { display: none; padding: 20px; }
-        .active-page { display: block; }
-
-        nav { display: flex; justify-content: space-between; padding: 15px; background: #1e293b; align-items: center; }
-        .wallet-box { background: #000; padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent); }
-
-        /* Game Cards */
-        .games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
-        .card { background: #1e293b; padding: 20px; border-radius: 15px; cursor: pointer; border: 1px solid #334155; }
-        
-        /* Aviator Game UI */
-        .aviator-screen { background: #000; height: 200px; margin: 20px 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        #multi { font-size: 3rem; font-weight: bold; }
-        .btn-bet { background: var(--accent); color: white; padding: 15px; width: 100%; border: none; border-radius: 10px; font-size: 1.2rem; cursor: pointer; }
-        .back-btn { background: #475569; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; float: left; }
-    </style>
-</head>
-<body>
-
-    <audio id="click-sound" src="https://www.soundjay.com/buttons/button-16.mp3"></audio>
-    <audio id="win-sound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
-    <audio id="loss-sound" src="https://www.soundjay.com/buttons/button-10.mp3"></audio>
-
-    <nav>
-        <div style="font-weight:bold; color:var(--primary)">NAVIN</div>
-        <div class="wallet-box">₹<span id="balance">500</span></div>
+        <div class="wallet">₹<span id="bal">500</span></div>
     </nav>
 
-    <div id="home-page" class="page active-page">
-        <h2>Sabhi Games</h2>
-        <div class="games-grid">
-            <div class="card" onclick="openGame('aviator')">🚀<br>Aviator</div>
-            <div class="card" onclick="openGame('mines')">💣<br>Mines</div>
-            <div class="card" onclick="openGame('dice')">🎲<br>Dice</div>
-            <div class="card" onclick="openGame('wheel')">🎡<br>Wheel</div>
+    <div id="pg-home" class="page active">
+        <h2 style="font-size: 1rem; color: #94a3b8;">Choose Your Game</h2>
+        <div class="grid">
+            <div class="card" onclick="go('pg-aviator')">🚀<br>Aviator</div>
+            <div class="card" onclick="go('pg-mines')">💣<br>Mines</div>
+            <div class="card" onclick="go('pg-dice')">🎲<br>Dice</div>
+            <div class="card" onclick="go('pg-wheel')">🎡<br>Wheel</div>
         </div>
     </div>
 
-    <div id="aviator-page" class="page">
-        <button class="back-btn" onclick="goHome()">← Back</button>
-        <h3>Aviator 🚀</h3>
-        <div class="aviator-screen">
-            <div id="multi">1.00x</div>
+    <div id="pg-aviator" class="page">
+        <span class="back" onclick="go('pg-home')">← Back to Lobby</span>
+        <div class="screen" id="avi-screen">
+            <h1 id="avi-multi" style="font-family:'Orbitron'; font-size: 3rem;">1.00x</h1>
+            <div id="avi-plane" style="position:absolute; left:10px; bottom:10px; font-size:2rem; display:none;">🚀</div>
         </div>
-        <button id="action-btn" class="btn-bet" onclick="startAviator()">Bet ₹10</button>
+        <button id="avi-btn" class="btn-play" onclick="playAviator()">BET ₹10</button>
     </div>
 
-    <div id="other-page" class="page">
-        <button class="back-btn" onclick="goHome()">← Back</button>
-        <h2 id="game-title">Game</h2>
-        <p>Yeh game jald hi aa raha hai!</p>
+    <div id="pg-mines" class="page">
+        <span class="back" onclick="go('pg-home')">← Back</span>
+        <h3>Mines (Find Diamond)</h3>
+        <div class="mines-grid" id="m-grid">
+            </div>
+        <p id="m-status" style="margin-top:15px;">Bet: ₹20</p>
+        <button id="m-btn" class="btn-play" onclick="startMines()">START MINES</button>
+    </div>
+
+    <div id="pg-dice" class="page">
+        <span class="back" onclick="go('pg-home')">← Back</span>
+        <div class="screen">
+            <h1 id="dice-val" style="font-size: 5rem;">🎲</h1>
+        </div>
+        <button class="btn-play" onclick="rollDice()">ROLL DICE (₹10)</button>
+    </div>
+
+    <div id="pg-wheel" class="page">
+        <span class="back" onclick="go('pg-home')">← Back</span>
+        <div class="screen">
+            <div id="wheel-obj" style="font-size: 4rem; transition: 2s ease-out;">🎡</div>
+        </div>
+        <button class="btn-play" onclick="spinWheel()">SPIN WHEEL (₹20)</button>
     </div>
 
     <script>
@@ -191,260 +95,108 @@
         let running = false;
         let timer;
 
-        // Sounds
-        function playSound(id) { document.getElementById(id).play(); }
+        // Audio Fix for Mobile
+        function initAudio() { document.querySelectorAll('audio').forEach(a => { a.play(); a.pause(); }); }
+        function snd(n) { document.getElementById('s-'+n).currentTime=0; document.getElementById('s-'+n).play(); }
 
-        // Navigation
-        function openGame(game) {
-            playSound('click-sound');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            if(game === 'aviator') {
-                document.getElementById('aviator-page').classList.add('active-page');
+        function go(id) {
+            snd('click');
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'pg-mines') resetMinesUI();
+        }
+
+        function updateBal() { document.getElementById('bal').innerText = balance; }
+
+        // --- AVIATOR LOGIC ---
+        function playAviator() {
+            let btn = document.getElementById('avi-btn');
+            let txt = document.getElementById('avi-multi');
+            let plane = document.getElementById('avi-plane');
+
+            if(!running) {
+                if(balance < 10) return alert("Low Balance!");
+                balance -= 10; updateBal(); running = true;
+                let cur = 1.00;
+                let crash = (Math.random() * 3 + 1.1).toFixed(2);
+                btn.innerText = "CASH OUT"; btn.style.background = "#f59e0b";
+                plane.style.display = "block";
+                snd('click');
+
+                timer = setInterval(() => {
+                    cur += 0.04;
+                    txt.innerText = cur.toFixed(2) + "x";
+                    plane.style.transform = `translate(${(cur-1)*40}px, -${(cur-1)*40}px)`;
+                    if(cur >= crash) {
+                        clearInterval(timer); running = false;
+                        txt.innerText = "CRASHED"; txt.style.color = "red";
+                        btn.innerText = "BET ₹10"; btn.style.background = "#10b981";
+                        plane.style.display = "none"; snd('lose');
+                    }
+                }, 100);
             } else {
-                document.getElementById('game-title').innerText = game.toUpperCase();
-                document.getElementById('other-page').classList.add('active-page');
+                clearInterval(timer); running = false;
+                let win = Math.floor(10 * parseFloat(txt.innerText));
+                balance += win; updateBal();
+                snd('win'); alert("Won ₹" + win);
+                btn.innerText = "BET ₹10"; btn.style.background = "#10b981";
+                plane.style.display = "none";
             }
         }
 
-        function goHome() {
-            playSound('click-sound');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.getElementById('home-page').classList.add('active-page');
+        // --- MINES LOGIC ---
+        let minePos = 0;
+        function resetMinesUI() {
+            let g = document.getElementById('m-grid');
+            g.innerHTML = '';
+            for(let i=0; i<9; i++) g.innerHTML += `<div class="tile" onclick="checkMine(${i}, this)">?</div>`;
+        }
+        function startMines() {
+            if(balance < 20) return alert("Low Balance!");
+            balance -= 20; updateBal();
+            minePos = Math.floor(Math.random() * 9);
+            resetMinesUI();
+            document.getElementById('m-status').innerText = "Game Active! Avoid Bomb.";
+            snd('click');
+        }
+        function checkMine(i, el) {
+            if(i === minePos) {
+                el.innerText = "💣"; el.style.background = "red"; snd('lose'); alert("BOOM! Lost.");
+                resetMinesUI();
+            } else {
+                el.innerText = "💎"; el.style.background = "green"; snd('win');
+                balance += 30; updateBal();
+            }
         }
 
-        // Aviator Logic
-        function startAviator() {
-            if(running) {
-                // Cash Out
-                running = false;
-                clearInterval(timer);
-                let val = parseFloat(document.getElementById('multi').innerText);
-                let win = Math.floor(10 * val);
-                balance += win;
-                document.getElementById('balance').innerText = balance;
-                document.getElementById('action-btn').innerText = "Bet ₹10";
-                playSound('win-sound');
-                alert("You Won ₹" + win + "!");
-                return;
-            }
+        // --- DICE LOGIC ---
+        function rollDice() {
+            if(balance < 10) return;
+            balance -= 10; updateBal();
+            let d = document.getElementById('dice-val');
+            snd('click');
+            let res = Math.floor(Math.random() * 6) + 1;
+            d.innerText = "🎲";
+            setTimeout(() => {
+                d.innerText = res;
+                if(res > 3) { balance += 20; updateBal(); snd('win'); } else { snd('lose'); }
+            }, 500);
+        }
 
-            // Start Game
-            if(balance < 10) return alert("Paisa nahi hai!");
-            balance -= 10;
-            document.getElementById('balance').innerText = balance;
-            running = true;
-            let current = 1.00;
-            let crash = (Math.random() * 3 + 1.1).toFixed(2); 
-            document.getElementById('action-btn').innerText = "CASH OUT";
-            playSound('click-sound');
-
-            timer = setInterval(() => {
-                current += 0.05;
-                document.getElementById('multi').innerText = current.toFixed(2) + "x";
-                
-                if(current >= crash) {
-                    clearInterval(timer);
-                    running = false;
-                    document.getElementById('multi').innerText = "CRASHED!";
-                    document.getElementById('action-btn').innerText = "Bet ₹10";
-                    playSound('loss-sound');
-                }
-            }, 100);
+        // --- WHEEL LOGIC ---
+        function spinWheel() {
+            if(balance < 20) return;
+            balance -= 20; updateBal();
+            let w = document.getElementById('wheel-obj');
+            let deg = Math.floor(Math.random() * 360) + 1000;
+            w.style.transform = `rotate(${deg}px)`; // Logic for visual only
+            snd('click');
+            setTimeout(() => {
+                let win = Math.random() > 0.5;
+                if(win) { balance += 50; updateBal(); snd('win'); alert("Wheel Won ₹50!"); }
+                else { snd('lose'); alert("Try Again!"); }
+            }, 2000);
         }
     </script>
-</body>
-</html>
-    
-    <div class="hero">
-        <h2>India's No. 1 Gaming Hub</h2>
-        <p>Kheliye apne favorite games aur jeetiye bade inaam!</p>
-    </div>
-
-    <div class="games-grid">
-        <div class="game-card">
-            <span class="tag tag-hot">POPULAR</span>
-            <div class="game-icon">🚀</div>
-            <h3>Aviator</h3>
-            <p>Predict the flight and cash out instantly.</p>
-            <a href="#" class="play-btn">Play Now</a>
-        </div>
-
-        <div class="game-card">
-            <span class="tag tag-new">NEW</span>
-            <div class="game-icon">💣</div>
-            <h3>Mines</h3>
-            <p>Find the diamonds, avoid the bombs.</p>
-            <a href="#" class="play-btn">Play Now</a>
-        </div>
-
-        <div class="game-card">
-            <div class="game-icon">🎲</div>
-            <h3>Dice Roll</h3>
-            <p>Classic high-low multiplier game.</p>
-            <a href="#" class="play-btn">Play Now</a>
-        </div>
-
-        <div class="game-card">
-            <div class="game-icon">🎡</div>
-            <h3>Lucky Wheel</h3>
-            <p>Spin the wheel for mega rewards.</p>
-            <a href="#" class="play-btn">Play Now</a>
-        </div>
-
-        <div class="game-card">
-            <div class="game-icon">🃏</div>
-            <h3>Teen Patti</h3>
-            <p>The ultimate Indian card game experience.</p>
-            <a href="#" class="play-btn">Play Now</a>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2026 Navin Gaming Portal. All Rights Reserved. <br>
-        <small>Responsible gaming is advised.</small>
-    </footer>
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navin Aviator - Play Now</title>
-    <style>
-        :root { --primary: #3b82f6; --danger: #ef4444; --bg: #0f172a; }
-        body { margin: 0; font-family: 'Arial', sans-serif; background: var(--bg); color: white; overflow-x: hidden; }
-        
-        /* Navbar */
-        nav { display: flex; justify-content: space-between; padding: 15px; background: #1e293b; align-items: center; border-bottom: 2px solid var(--primary); }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); letter-spacing: 2px; }
-        .wallet { background: #000; padding: 8px 15px; border-radius: 20px; border: 1px solid #10b981; font-weight: bold; }
-
-        /* Game Area */
-        .game-container { max-width: 600px; margin: 20px auto; background: #000; height: 300px; border-radius: 15px; position: relative; border: 2px solid #334155; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        #multiplier { font-size: 4rem; font-weight: bold; color: white; z-index: 10; }
-        #plane { position: absolute; bottom: 20px; left: 20px; font-size: 3rem; transition: transform 0.1s linear; display: none; }
-        .crash-text { color: var(--danger); font-size: 2rem; display: none; z-index: 20; position: absolute; }
-
-        /* Controls */
-        .controls { max-width: 600px; margin: 20px auto; padding: 20px; background: #1e293b; border-radius: 15px; text-align: center; }
-        .bet-input { width: 80%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: none; font-size: 1rem; }
-        .btn { width: 100%; padding: 15px; font-size: 1.2rem; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; transition: 0.2s; }
-        #bet-btn { background: #10b981; color: white; }
-        #cashout-btn { background: #f59e0b; color: white; display: none; }
-
-        /* Deposit Modal */
-        #deposit-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; color: #000; padding: 20px; border-radius: 15px; z-index: 1000; text-align: center; }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">NAVIN</div>
-        <div class="wallet">₹<span id="balance">0</span></div>
-        <button onclick="openModal()" style="background:#10b981; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;">ADD</button>
-    </nav>
-
-    <div class="game-container">
-        <div id="multiplier">1.00x</div>
-        <div id="plane">🚀</div>
-        <div class="crash-text" id="crash-msg">FLEW AWAY!</div>
-    </div>
-
-    <div class="controls">
-        <input type="number" id="bet-amount" class="bet-input" placeholder="Enter Bet (e.g. 10)">
-        <button id="bet-btn" class="btn" onclick="startGame()">PLACE BET</button>
-        <button id="cashout-btn" class="btn" onclick="cashOut()">CASH OUT</button>
-    </div>
-
-    <div id="deposit-modal">
-        <h3>Deposit to Wallet</h3>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9643629394@paytm&pn=Navin%20Gaming" width="150">
-        <p>Pay to: <b>9643629394</b></p>
-        <button onclick="addDemoCash()" style="width:100%; padding:10px; background:blue; color:white; border:none; border-radius:5px;">I have Paid (Add ₹500)</button>
-        <p onclick="closeModal()" style="cursor:pointer; font-size:12px; margin-top:10px;">Close</p>
-    </div>
-
-    <script>
-        let balance = 0;
-        let currentBet = 0;
-        let multi = 1.00;
-        let gameInterval;
-        let isFlying = false;
-
-        function openModal() { document.getElementById('deposit-modal').style.display = 'block'; }
-        function closeModal() { document.getElementById('deposit-modal').style.display = 'none'; }
-        
-        function addDemoCash() {
-            balance += 500;
-            document.getElementById('balance').innerText = balance;
-            closeModal();
-            alert("₹500 added! Ab kheliye.");
-        }
-
-        function startGame() {
-            let bet = parseInt(document.getElementById('bet-amount').value);
-            if (isNaN(bet) || bet > balance || bet <= 0) {
-                alert("Balance check karein ya sahi amount daalein!");
-                return;
-            }
-
-            // Setup
-            balance -= bet;
-            currentBet = bet;
-            document.getElementById('balance').innerText = balance;
-            isFlying = true;
-            multi = 1.00;
-            
-            document.getElementById('bet-btn').style.display = 'none';
-            document.getElementById('cashout-btn').style.display = 'block';
-            document.getElementById('plane').style.display = 'block';
-            document.getElementById('crash-msg').style.display = 'none';
-            document.getElementById('multiplier').style.color = 'white';
-
-            // Plane animation logic
-            let crashPoint = (Math.random() * 5 + 1).toFixed(2); // Random crash between 1.0x and 6.0x
-            
-            gameInterval = setInterval(() => {
-                multi += 0.01;
-                document.getElementById('multiplier').innerText = multi.toFixed(2) + "x";
-                
-                // Move plane
-                let move = (multi - 1) * 50;
-                document.getElementById('plane').style.transform = `translate(${move}px, -${move}px)`;
-
-                if (multi >= crashPoint) {
-                    crashGame();
-                }
-            }, 100);
-        }
-
-        function cashOut() {
-            if (!isFlying) return;
-            let winAmount = Math.floor(currentBet * multi);
-            balance += winAmount;
-            document.getElementById('balance').innerText = balance;
-            alert("Badhai ho! Aapne ₹" + winAmount + " jeete!");
-            resetGame();
-        }
-
-        function crashGame() {
-            isFlying = false;
-            clearInterval(gameInterval);
-            document.getElementById('multiplier').style.color = 'red';
-            document.getElementById('crash-msg').style.display = 'block';
-            document.getElementById('plane').style.display = 'none';
-            setTimeout(resetGame, 2000);
-        }
-
-        function resetGame() {
-            isFlying = false;
-            clearInterval(gameInterval);
-            document.getElementById('bet-btn').style.display = 'block';
-            document.getElementById('cashout-btn').style.display = 'none';
-            document.getElementById('plane').style.transform = `translate(0,0)`;
-        }
-    </script>
-</body>
-</html>
-    
 </body>
 </html>
