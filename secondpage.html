@@ -1,264 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ultra Premium Form</title>
-  <style>
-    /* Basic reset */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-    }
-
-    /* Background image with cinematic overlay */
-    .background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: url('https://images.unsplash.com/photo-1617109764936-0a03d77c99d7?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
-      filter: brightness(0.5);
-      z-index: 0;
-    }
-
-    /* Particle animation canvas */
-    #particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Form container */
-    .form-container {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(0,0,0,0.85);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 60px rgba(0,0,0,0.7);
-      color: white;
-      max-width: 400px;
-      width: 90%;
-      z-index: 2;
-      text-align: center;
-      opacity: 0;
-      animation: fadeIn 1.5s forwards 0.5s;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    h1 {
-      margin-bottom: 20px;
-      font-size: 2rem;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
-
-    /* Glow + ripple button */
-    .submit-button {
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      color: white;
-      padding: 16px 40px;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 8px 35px rgba(255,65,108,0.6);
-      position: relative;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .submit-button:active::after {
-      transform: scale(2);
-      opacity: 0;
-    }
-
-    .submit-button::after {
-      content: '';
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      background: rgba(255,255,255,0.4);
-      display: block;
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      opacity: 1;
-      pointer-events: none;
-      transition: transform 0.5s, opacity 0.5s;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-    .submit-button:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 45px rgba(255,65,108,0.8);
-      background: linear-gradient(90deg, #ff4b2b, #ff416c);
-    }
-
-    /* Modal Popup */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-    }
-
-    .modal-content {
-      background: rgba(255,255,255,0.95);
-      color: #333;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      width: 90%;
-      max-width: 450px;
-      box-shadow: 0 10px 50px rgba(0,0,0,0.7);
-    }
-
-    .modal-content h2 {
-      margin-bottom: 20px;
-    }
-
-    .close-btn {
-      background: #ff416c;
-      color: white;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartik Logistics | Fast & Reliable Trucking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-50 font-sans">
 
-  <div class="background"></div>
-  <canvas id="particles"></canvas>
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-700 underline decoration-orange-500">KARTIK TRANS</h1>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#" class="hover:text-blue-600">Home</a>
+                <a href="#services" class="hover:text-blue-600">Services</a>
+                <a href="#track" class="hover:text-blue-600">Track Order</a>
+                <a href="#contact" class="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition">Book Now</a>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Form container bottom-right -->
-  <div class="form-container">
-    <h1>Premium Contact Form</h1>
-    <input type="text" placeholder="Your Name" id="name">
-    <input type="email" placeholder="Your Email" id="email">
-    <textarea placeholder="Your Message" id="message"></textarea>
-    <button class="submit-button" onclick="submitForm()">Submit</button>
-  </div>
+    <header class="relative bg-blue-900 text-white py-24 px-4 overflow-hidden">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-5xl font-extrabold leading-tight mb-4">Poore Bharat Mein <br><span class="text-orange-400">Tez aur Surakshit</span> Delivery</h2>
+                <p class="text-lg mb-8 text-gray-300">Hum provide karte hain premium truck transport services aapke business ke liye. 24/7 support aur live tracking ke saath.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-orange-500 px-8 py-3 rounded-lg font-bold hover:bg-orange-600 shadow-xl">Get Quote</button>
+                    <button class="border-2 border-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-900 transition">Our Fleet</button>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="bg-blue-800 p-8 rounded-2xl shadow-2xl border border-blue-700">
+                    <i class="fas fa-truck-moving text-[120px] text-orange-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <!-- Modal -->
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <h2>Form Submitted Successfully!</h2>
-      <button class="close-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
+    <section id="services" class="py-16 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-gray-800">Hamari Suvidhayein</h3>
+            <div class="h-1 w-20 bg-orange-500 mx-auto mt-2"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-600 hover:shadow-2xl transition">
+                <i class="fas fa-boxes text-4xl text-blue-600 mb-4"></i>
+                <h4 class="text-xl font-bold mb-2">Full Truck Load (FTL)</h4>
+                <p class="text-gray-600">Bade orders ke liye poora truck aapke control mein.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-orange-500 hover:shadow-2xl transition">
+                <i class="fas fa-map-marker-alt text-4xl text-orange-500 mb-4"></i>
+                <h4 class="text-xl font-bold mb-2">Real-time Tracking</h4>
+                <p class="text-gray-600">Har pal ki khabar, GPS tracking ke saath mobile par.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-600 hover:shadow-2xl transition">
+                <i class="fas fa-shield-alt text-4xl text-blue-600 mb-4"></i>
+                <h4 class="text-xl font-bold mb-2">Fully Insured</h4>
+                <p class="text-gray-600">Aapka saaman hamari zimmedari, full insurance ke saath.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Audio -->
-  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+    <section id="track" class="bg-gray-200 py-16 px-4">
+        <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-300">
+            <h3 class="text-2xl font-bold mb-6 text-center text-blue-900">Apna Saaman Track Karein</h3>
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" placeholder="Enter Consignment Number (e.g. KT12345)" class="flex-grow p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button class="bg-blue-700 text-white px-10 py-4 rounded-lg font-bold hover:bg-blue-800 transition">Track Now</button>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Button submit
-    function submitForm() {
-      // Sound
-      document.getElementById('clickSound').play();
-      // Show modal
-      document.getElementById('successModal').style.display = 'flex';
-      // Ripple animation
-      const btn = document.querySelector('.submit-button');
-      const ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      btn.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 500);
-    }
-    function closeModal() {
-      document.getElementById('successModal').style.display = 'none';
-    }
-
-    // Particle effect
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let w = canvas.width = window.innerWidth;
-    let h = canvas.height = window.innerHeight;
-    const particles = [];
-    const particleCount = 80;
-
-    function Particle() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 3 + 1;
-      this.speedX = Math.random() * 1 - 0.5;
-      this.speedY = Math.random() * 1 - 0.5;
-    }
-
-    Particle.prototype.update = function() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x > w) this.x = 0;
-      if (this.x < 0) this.x = w;
-      if (this.y > h) this.y = 0;
-      if (this.y < 0) this.y = h;
-    }
-
-    Particle.prototype.draw = function() {
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-      ctx.fill();
-    }
-
-    function initParticles() {
-      for (let i=0; i<particleCount; i++) particles.push(new Particle());
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0,0,w,h);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener('resize', () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    });
-
-    initParticles();
-    animateParticles();
-  </script>
+    <footer id="contact" class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xl font-bold mb-4">Kartik Trans</h4>
+                <p class="text-gray-400">Trusted Logistics Partner since 2024. Serving India with pride.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                <ul class="text-gray-400 space-y-2">
+                    <li><a href="#" class="hover:text-orange-400">About Us</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-orange-400">Partner with Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Contact</h4>
+                <p class="text-gray-400"><i class="fas fa-phone mr-2"></i> +91 98XXX XXXXX</p>
+                <p class="text-gray-400"><i class="fas fa-envelope mr-2"></i> info@kartiktrans.com</p>
+            </div>
+        </div>
+        <div class="text-center mt-12 pt-8 border-t border-gray-800 text-gray-500">
+            &copy; 2024 Kartik Logistics Service. All rights reserved.
+        </div>
+    </footer>
 
 </body>
 </html>
