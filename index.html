@@ -1,339 +1,94 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Ultimate Gaming</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>AI Chatbot</title>
     <style>
-        :root { --p: #3b82f6; --s: #10b981; --bg: #020617; --gold: #f59e0b; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: white; text-align: center; overflow-x: hidden; user-select: none; }
-        
-        /* Navbar */
-        nav { display: flex; justify-content: space-between; padding: 15px; background: rgba(15, 23, 42, 0.95); border-bottom: 2px solid var(--p); position: sticky; top: 0; z-index: 1000; }
-        .logo { font-family: 'Orbitron'; color: var(--p); text-shadow: 0 0 10px var(--p); font-size: 1.4rem; }
-        .wallet { background: #000; padding: 8px 15px; border-radius: 30px; border: 1px solid var(--s); color: var(--s); font-weight: bold; font-size: 1.1rem; }
-
-        /* Money Notification Sticker */
-        #money-pop { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--s); color: white; padding: 10px 25px; border-radius: 50px; font-weight: bold; z-index: 2000; transition: 0.5s; box-shadow: 0 5px 20px rgba(16, 185, 129, 0.5); }
-
-        /* Page System */
-        .page { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        /* Game Cards */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
-        .card { background: linear-gradient(145deg, #1e293b, #0f172a); padding: 30px 10px; border-radius: 20px; border: 1px solid #334155; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
-        .card:active { transform: scale(0.9); }
-        .card h3 { margin: 10px 0 0 0; font-size: 1rem; color: #fff; }
-
-        /* Aviator Screen */
-        .screen { background: #000; height: 260px; border-radius: 20px; margin: 20px auto; border: 2px solid #1e293b; display: flex; align-items: center; justify-content: center; position: relative; max-width: 450px; overflow: hidden; }
-        #multi-val { font-family: 'Orbitron'; font-size: 3.5rem; color: white; z-index: 10; text-shadow: 0 0 20px var(--p); }
-        #plane { position: absolute; bottom: 20px; left: 20px; font-size: 2.5rem; z-index: 5; transition: 0.1s linear; display: none; }
-
-        /* Controls */
-        .bet-box { max-width: 450px; margin: auto; background: #1e293b; padding: 20px; border-radius: 20px; border: 1px solid #334155; }
-        input[type="number"] { width: 80%; padding: 12px; border-radius: 10px; border: none; background: #020617; color: #10b981; font-size: 1.2rem; text-align: center; margin-bottom: 15px; font-weight: bold; }
-        .btn-main { background: var(--s); color: white; border: none; padding: 15px; width: 90%; border-radius: 15px; font-size: 1.3rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #059669; }
-        .btn-main:active { transform: translateY(3px); box-shadow: none; }
-        .btn-cashout { background: var(--gold); box-shadow: 0 4px 0 #d97706; }
-
-        .back-btn { text-align: left; color: #64748b; font-size: 1rem; cursor: pointer; margin-bottom: 10px; display: inline-block; }
+        body {
+            font-family: Arial;
+            background: #f0f0f0;
+        }
+        .chatbox {
+            width: 300px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            background: white;
+            padding: 10px;
+        }
+        .messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .input-box {
+            display: flex;
+            margin-top: 10px;
+        }
+        input {
+            flex: 1;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+            background: blue;
+            color: white;
+            border: none;
+        }
+        .user {
+            text-align: right;
+            color: green;
+        }
+        .bot {
+            text-align: left;
+            color: black;
+        }
     </style>
 </head>
-<body onclick="startAllSounds()">
-    <a href="withdraw.html" style="
-display:block;
-background:red;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-">
-💸 Withdraw Money
-    
-<p style="color:red; font-weight:bold;">
-⚡ Minimum Withdrawal ₹100
-</p>
 
-<!-- 👤 Name -->
+<body>
 
-✅ Request will be processed within 24 hours
-</p>
+<div class="chatbox">
+    <h3>AI Chatbot 🤖</h3>
+    <div class="messages" id="messages"></div>
 
+    <div class="input-box">
+        <input type="text" id="userInput" placeholder="Type message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 </div>
 
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value;
+    
+    if(message === "") return;
 
+    let messages = document.getElementById("messages");
 
-<h2 style="color:#0d6efd;">🎮 Pay & Play Game</h2>
+    // User message
+    messages.innerHTML += "<div class='user'>" + message + "</div>";
 
-<p style="color:red; font-weight:bold;">
-🔥 Limited Offer – Only ₹50 Entry
-</p>
+    // Bot reply
+    let reply = getBotReply(message);
+    messages.innerHTML += "<div class='bot'>" + reply + "</div>";
 
-<!-- 💰 Pay Button -->
-<a href="https://rzp.io/l/xxxxxx" target="_blank" style="
-display:block;
-background:#28a745;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-font-weight:bold;
-margin:10px;
-">
-💰 Pay Now
-</a>
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+}
 
-<!-- 📷 QR Section -->
-<h3>Scan & Pay</h3>
+function getBotReply(message) {
+    message = message.toLowerCase();
 
-<img src="qr.jpg" style="
-width:220px;
-border-radius:10px;
-border:2px solid #000;
-">
+    if(message.includes("hello")) return "Hello! How can I help you?";
+    if(message.includes("name")) return "I am your AI chatbot 🤖";
+    if(message.includes("course")) return "You are doing BCA, great choice!";
+    if(message.includes("job")) return "Keep practicing coding, you will get a job!";
+    if(message.includes("bye")) return "Goodbye 👋";
 
-<p style="margin-top:10px;">
-📲 UPI ID: <b>9643629394@ptaxis</b>
-</p>
+    return "Sorry, I don't understand.";
+}
+</script>
 
-<p style="color:green;">
-✅ Fast & Secure Payment
-</p>
-
-<!-- 📲 WhatsApp Confirm -->
-<a href="https://wa.me/919643629394?text=I%20have%20paid%20for%20game" 
-style="
-display:block;
-background:#25D366;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-margin-top:10px;
-">
-📲 I Have Paid – Send Access
-</a>
-
-    </div>
-    <!-- 💰 Pay Button -->
-<a href="https://rzp.io/l/xxxxxx" target="_blank" style="
-display:block;
-background:#28a745;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-font-weight:bold;
-margin:10px;
-">
-💰 Pay Now & Play Game
-</a>
-
-<!-- 🔥 Offer -->
-<p style="text-align:center; color:red; font-weight:bold;">
-🔥 Limited Offer – Only ₹50 Entry
-</p>
-
-<!-- ✅ Trust Line -->
-<p style="text-align:center; color:green;">
-✅ Secure Payment | Instant Support
-</p>
-
-<!-- 📲 After Payment Button -->
-<a href="https://wa.me/919643629394?text=I%20have%20paid%20for%20game" 
-style="
-display:block;
-background:#25D366;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-margin:10px;
-">
-📲 I Have Paid – Send Access
-</a>
-    <a href="https://rzp.io/l/abc123">
-display:block;
-background:#28a745;
-color:white;
-padding:12px;
-text-align:center;
-border-radius:6px;
-text-decoration:none;
-font-weight:bold;
-">
-💰 Pay Now & Play Game
-    </a>
-
-    <audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-    <audio id="snd-win" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
-    <audio id="snd-lose" src="https://assets.mixkit.co/active_storage/sfx/2004/2004-preview.mp3"></audio>
-    <audio id="snd-money" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
-
-    <div id="money-pop">💰 ₹<span id="pop-amt">0</span> Credited!</div>
-
-    <nav>
-        <div class="logo">Aviator PRO</div>
-        <div class="wallet" onclick="addMoney(500)">₹<span id="balance">500</span> <span style="font-size: 0.7rem;">+</span></div>
-    </nav>
-
-    <div id="pg-home" class="page active">
-        <h3 style="color:#64748b; margin-bottom: 20px;">Premium Game Lobby</h3>
-        <div class="grid">
-            <div class="card" onclick="navTo('pg-aviator')">
-                <span style="font-size: 2.5rem;">🚀</span>
-                <h3>AVIATOR</h3>
-            </div>
-            <div class="card" onclick="alert('Mines Coming Soon!')">
-                <span style="font-size: 2.5rem;">💣</span>
-                <h3>MINES</h3>
-            </div>
-            <div class="card" onclick="alert('Dice Coming Soon!')">
-                <span style="font-size: 2.5rem;">🎲</span>
-                <h3>DICE</h3>
-            </div>
-            <div class="card" onclick="alert('Wheel Coming Soon!')">
-                <span style="font-size: 2.5rem;">🎡</span>
-                <h3>WHEEL</h3>
-            </div>
-        </div>
-        <p style="margin-top: 30px; font-size: 0.8rem; color: #334155;">Click anywhere to start Music 🎵</p>
-    </div>
-
-    <div id="pg-aviator" class="page">
-        <div class="back-btn" onclick="navTo('pg-home')">← Back to Lobby</div>
-        <div class="screen">
-            <h1 id="multi-val">1.00x</h1>
-            <div id="plane">🚀</div>
-        </div>
-        <div class="bet-box">
-            <input type="number" id="bet-amt" value="10">
-            <button id="btn-play" class="btn-main" onclick="handleAviator()">PLACE BET</button>
-        </div>
-    </div>
-
-    <script>
-        let balance = 50000;
-        let isRunning = false;
-        let gameInterval;
-        let currentMulti = 1.00;
-        let musicStarted = false;
-
-        // Sabse important function: Pehle click par music chalu karne ke liye
-        function startAllSounds() {
-            if(!musicStarted) {
-                let bg = document.getElementById('bg-music');
-                bg.volume = 0.2; // Halki awaaz
-                bg.play().catch(e => console.log("Music wait for interaction"));
-                musicStarted = true;
-            }
-        }
-
-        function playS(id) {
-            let s = document.getElementById('snd-' + id);
-            if(s) { s.currentTime = 0; s.play(); }
-        }
-
-        function navTo(id) {
-            playS('click');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-
-        function showMoneyPop(amt) {
-            playS('money');
-            let pop = document.getElementById('money-pop');
-            document.getElementById('pop-amt').innerText = amt;
-            pop.style.top = "20px";
-            setTimeout(() => { pop.style.top = "-100px"; }, 3000);
-        }
-
-        function addMoney(amt) {
-            balance += amt;
-            updateUI();
-            showMoneyPop(amt);
-        }
-
-        function updateUI() {
-            document.getElementById('balance').innerText = balance;
-        }
-
-        // AVIATOR GAME LOGIC
-        function handleAviator() {
-            const btn = document.getElementById('btn-play');
-            const txt = document.getElementById('multi-val');
-            const plane = document.getElementById('plane');
-            let bet = parseInt(document.getElementById('bet-amt').value);
-
-            if(!isRunning) {
-                if(isNaN(bet) || bet <= 0 || bet > balance) {
-                    alert("Sahi amount daalo!");
-                    return;
-                }
-
-                // START GAME
-                playS('click');
-                balance -= bet;
-                updateUI();
-                isRunning = true;
-                currentMulti = 1.00;
-                let crashPoint = (Math.random() * 5 + 1.1).toFixed(2);
-
-                btn.innerText = "CASH OUT";
-                btn.classList.add('btn-cashout');
-                plane.style.display = "block";
-                txt.style.color = "white";
-
-                gameInterval = setInterval(() => {
-                    currentMulti += 0.04;
-                    txt.innerText = currentMulti.toFixed(2) + "x";
-                    
-                    // Plane Animation
-                    let pos = (currentMulti - 1) * 35;
-                    plane.style.transform = `translate(${pos}px, -${pos}px)`;
-
-                    if(currentMulti >= crashPoint) {
-                        // GAME CRASHED
-                        clearInterval(gameInterval);
-                        isRunning = false;
-                        playS('lose');
-                        txt.innerText = "CRASHED!";
-                        txt.style.color = "red";
-                        btn.innerText = "PLACE BET";
-                        btn.classList.remove('btn-cashout');
-                        plane.style.display = "none";
-                    }
-                }, 100);
-
-            } else {
-                // CASH OUT
-                clearInterval(gameInterval);
-                isRunning = false;
-                let winAmt = Math.floor(bet * currentMulti);
-                balance += winAmt;
-                updateUI();
-                showMoneyPop(winAmt);
-                playS('win');
-                
-                btn.innerText = "PLACE BET";
-                btn.classList.remove('btn-cashout');
-                plane.style.display = "none";
-                txt.innerText = currentMulti.toFixed(2) + "x";
-                txt.style.color = "#10b981";
-            }
-        }
-    </script>
 </body>
 </html>
