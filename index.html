@@ -1,94 +1,43 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>AI Chatbot</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f0f0f0;
-        }
-        .chatbox {
-            width: 300px;
-            margin: 50px auto;
-            border: 1px solid #ccc;
-            background: white;
-            padding: 10px;
-        }
-        .messages {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 5px;
-        }
-        .input-box {
-            display: flex;
-            margin-top: 10px;
-        }
-        input {
-            flex: 1;
-            padding: 5px;
-        }
-        button {
-            padding: 5px 10px;
-            background: blue;
-            color: white;
-            border: none;
-        }
-        .user {
-            text-align: right;
-            color: green;
-        }
-        .bot {
-            text-align: left;
-            color: black;
-        }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,
+
+initial-scale=1.0">
+
+<title>Animated Login Form</title>
+
+<style>
+
+body {
+
+margin: 0;
+
+height: 100vh;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+background: #fefefe;
+
+}
+
+div{
+
+}
+
+height: 200px;
+
+</style>
+
 </head>
 
 <body>
-
-<div class="chatbox">
-    <h3>AI Chatbot 🤖</h3>
-    <div class="messages" id="messages"></div>
-
-    <div class="input-box">
-        <input type="text" id="userInput" placeholder="Type message...">
-        <button onclick="sendMessage()">Send</button>
-    </div>
-</div>
-
-<script>
-function sendMessage() {
-    let input = document.getElementById("userInput");
-    let message = input.value;
-    
-    if(message === "") return;
-
-    let messages = document.getElementById("messages");
-
-    // User message
-    messages.innerHTML += "<div class='user'>" + message + "</div>";
-
-    // Bot reply
-    let reply = getBotReply(message);
-    messages.innerHTML += "<div class='bot'>" + reply + "</div>";
-
-    input.value = "";
-    messages.scrollTop = messages.scrollHeight;
-}
-
-function getBotReply(message) {
-    message = message.toLowerCase();
-
-    if(message.includes("hello")) return "Hello! How can I help you?";
-    if(message.includes("name")) return "I am your AI chatbot 🤖";
-    if(message.includes("course")) return "You are doing BCA, great choice!";
-    if(message.includes("job")) return "Keep practicing coding, you will get a job!";
-    if(message.includes("bye")) return "Goodbye 👋";
-
-    return "Sorry, I don't understand.";
-}
-</script>
-
-</body>
-</html>
